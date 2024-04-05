@@ -249,9 +249,6 @@ public class VisitorOrientedParser {
             List<Integer> intElems = new ArrayList<>();
             List<Record> recordElems = new ArrayList<>();
 
-            System.out.println("-------------");
-            System.out.println(ctx.getText());
-
             if (ctx.STRING() != null)
                 for (TerminalNode s : ctx.STRING())
                     strElems.add(s.getText());
