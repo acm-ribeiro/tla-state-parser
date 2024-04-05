@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -276,6 +276,16 @@ public interface TLAStateListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBodyType(TLAStateParser.BodyTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link TLAStateParser#typeID}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeID(TLAStateParser.TypeIDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLAStateParser#typeID}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeID(TLAStateParser.TypeIDContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TLAStateParser#bodyInt}.
 	 * @param ctx the parse tree

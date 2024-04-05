@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from java-escape by ANTLR 4.11.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -335,6 +335,18 @@ public class TLAStateBaseListener implements TLAStateListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBodyType(TLAStateParser.BodyTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeID(TLAStateParser.TypeIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeID(TLAStateParser.TypeIDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

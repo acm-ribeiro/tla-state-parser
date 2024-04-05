@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -171,6 +171,12 @@ public interface TLAStateVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBodyType(TLAStateParser.BodyTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link TLAStateParser#typeID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeID(TLAStateParser.TypeIDContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TLAStateParser#bodyInt}.
 	 * @param ctx the parse tree
