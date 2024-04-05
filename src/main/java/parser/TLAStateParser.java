@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+package parser;// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -133,7 +133,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitState(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -210,7 +210,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitStateElement(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitStateElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -269,7 +269,7 @@ public class TLAStateParser extends Parser {
 				setState(83);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
@@ -319,7 +319,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitResState(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitResState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -374,7 +374,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitResponseRecord(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitResponseRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -428,7 +428,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitCode(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitCode(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -476,7 +476,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitCodeID(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitCodeID(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -534,7 +534,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitEntity(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitEntity(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -594,7 +594,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitMap(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitMap(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -657,7 +657,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitMapElement(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitMapElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -715,7 +715,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitRecord(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -783,7 +783,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitRecordElement(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitRecordElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -835,7 +835,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitFieldValue(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitFieldValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -914,7 +914,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitSet(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitSet(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -991,7 +991,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitSetElement(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitSetElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1106,7 +1106,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitFState(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitFState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1154,7 +1154,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitPcState(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitPcState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1204,7 +1204,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitReqState(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitReqState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1268,7 +1268,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitRequestRecord(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitRequestRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1330,7 +1330,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitOperation(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1378,7 +1378,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitOperationID(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitOperationID(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1433,7 +1433,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitVerb(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitVerb(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1481,7 +1481,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitVerbID(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitVerbID(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1545,7 +1545,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitParameters(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitParameters(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1625,7 +1625,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitBody(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBody(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1703,7 +1703,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitParamRecord(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitParamRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1793,7 +1793,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitBodyRecord(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1869,7 +1869,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitBodyType(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1917,7 +1917,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitTypeID(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitTypeID(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1970,7 +1970,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitBodyInt(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2018,7 +2018,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitBodyBool(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyBool(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2070,7 +2070,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitBodyObject(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyObject(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2134,7 +2134,7 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor ) return ((TLAStateVisitor<? extends T>)visitor).visitObjectRecord(this);
+			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitObjectRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
