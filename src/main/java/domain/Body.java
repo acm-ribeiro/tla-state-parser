@@ -25,6 +25,7 @@ public class Body {
             for (BodyRecord b : bodyRecords)
                 s.append(b.toString() + "\n");
 
+            s.deleteCharAt(s.length() - 1);
             s.append("    }");
 
             return s.toString();

@@ -79,7 +79,8 @@ public class VisitorOrientedParser {
 
             for (TLAStateParser.MapElementContext elemCtx : elemsCtx) {
                 Record r = elemCtx.record().accept(recordVisitor);
-                records.put(name, r);
+                String key = elemCtx.STRING().getText();
+                records.put(key, r);
             }
 
             return new Entity(name, records);
@@ -195,15 +196,15 @@ public class VisitorOrientedParser {
             List<String> strRecords = new ArrayList<>();
 
             for (TLAStateParser.RecordContext r : ctx.record()) {
-                List<RecordElement> elems = new ArrayList<>();
+                Map<String, RecordFieldValue> elems = new HashMap<>();
 
                 for (TLAStateParser.RecordElementContext e : r.recordElement()){
                    String name = e.STRING().getText();
 
                    RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
                    RecordFieldValue value = e.fieldValue().accept(recordFieldValueVisitor);
-
-                   elems.add(new RecordElement(name, value));
+                   elems.put(name, value);
+//                   elems.add(new RecordElement(name, value));
                 }
                 records.add(new Record(elems));
             }
@@ -270,24 +271,32 @@ public class VisitorOrientedParser {
     public static class RecordVisitor extends TLAStateBaseVisitor<Record> {
         @Override
         public Record visitRecord(TLAStateParser.RecordContext ctx) {
-            RecordElementVisitor recordElementVisitor = new RecordElementVisitor();
-            List<RecordElement> elems = new ArrayList<>();
+            RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
+            Map<String, RecordFieldValue> elems = new HashMap<>();
 
-            for (TLAStateParser.RecordElementContext e : ctx.recordElement())
-                elems.add(e.accept(recordElementVisitor));
+            String name;
+            RecordFieldValue value;
+
+            for (TLAStateParser.RecordElementContext e : ctx.recordElement()){
+                name = e.STRING().getText();
+                value = e.fieldValue().accept(fieldValueVisitor);
+                elems.put(name, value);
+//                elems.add(e.accept(recordElementVisitor));
+            }
+
 
             return new Record(elems);
         }
     }
 
-    public static class RecordElementVisitor extends TLAStateBaseVisitor<RecordElement> {
-        @Override
-        public RecordElement visitRecordElement(TLAStateParser.RecordElementContext ctx) {
-            String name = ctx.STRING().getText();
-            RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
-            RecordFieldValue fieldValue = ctx.fieldValue().accept(fieldValueVisitor);
-             return new RecordElement(name, fieldValue);
-        }
-    }
+//    public static class RecordElementVisitor extends TLAStateBaseVisitor<RecordElement> {
+//        @Override
+//        public RecordElement visitRecordElement(TLAStateParser.RecordElementContext ctx) {
+//            String name = ctx.STRING().getText();
+//            RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
+//            RecordFieldValue fieldValue = ctx.fieldValue().accept(fieldValueVisitor);
+//            return new RecordElement(name, fieldValue);
+//        }
+//    }
 
 }

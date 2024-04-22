@@ -21,9 +21,12 @@ public class Set {
         else {
             StringBuilder s = new StringBuilder();
 
-            s.append("{\n");
+            s.append("{");
             for(SetElement e : elems)
-                s.append(e.toString() + "\n");
+                s.append(e.toString() + ", ");
+
+            s.deleteCharAt(s.length()-1);
+            s.deleteCharAt(s.length()-1);
             s.append("}");
 
             return s.toString();

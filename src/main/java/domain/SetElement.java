@@ -34,16 +34,17 @@ public class SetElement {
                 s.append(str + ",");
         else if (!intElems.isEmpty())
             for(Integer i : intElems)
-                s.append(i.toString() + ",");
+                s.append( i.toString() + ",");
         else if(!recordElems.isEmpty())
             for(Record r: recordElems)
                 s.append(r.toString() + ",");
 
         if(!s.isEmpty()) {
-            s.deleteCharAt(s.length());
+            s.deleteCharAt(s.length()-1);
             return s.toString();
         } else
             return "";
+
     }
 
 }

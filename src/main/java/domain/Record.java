@@ -1,27 +1,33 @@
 package domain;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Record {
 
-    private List<RecordElement> elems;
+    private Map<String, RecordFieldValue> elems;
 
-    public Record(List<RecordElement> elems) {
+    public Record(Map<String, RecordFieldValue> elems) {
         this.elems = elems;
     }
 
-    public List<RecordElement> getElems() {
+    public Map<String, RecordFieldValue> getElems() {
         return elems;
+    }
+
+    public RecordFieldValue getElement(String name) {
+        return elems.getOrDefault(name, null);
     }
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        for(RecordElement e : elems)
-            s.append(e.toString() + "\n");
+        for(Entry<String, RecordFieldValue> e : elems.entrySet())
+            s.append("        " + e.getKey() + " = " + e.getValue() + "\n");
 
         s.deleteCharAt(s.length()-1);
+        s.append("      }\n");
 
         return s.toString();
     }

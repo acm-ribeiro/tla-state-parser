@@ -7,6 +7,13 @@ public class RecordFieldValue {
     private Boolean bool;
     private Set set;
 
+    public RecordFieldValue(String str, Integer num, Boolean bool, Set set) {
+        this.str = str;
+        this.num = num;
+        this.bool = bool;
+        this.set = set;
+    }
+
     public String getStr() {
         return str;
     }
@@ -23,12 +30,6 @@ public class RecordFieldValue {
         return set;
     }
 
-    public RecordFieldValue(String str, Integer num, Boolean bool, Set set) {
-        this.str = str;
-        this.num = num;
-        this.bool = bool;
-        this.set = set;
-    }
 
     @Override
     public String toString() {
