@@ -14,6 +14,21 @@ public class State {
         return elements;
     }
 
+    /**
+     * Checks whether this state is a final state.
+     *
+     * @return true if it is a final state; false otherwise.
+     */
+    public boolean isFinalState() {
+        boolean isFinalState = false;
+
+        for (StateElement e : elements)
+            if (e.getF() != null)
+                isFinalState = e.getF().getF();
+
+        return isFinalState;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

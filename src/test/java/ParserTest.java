@@ -72,7 +72,33 @@ public class ParserTest {
 
         assert(actual.get(0));  // is empty
         assert(!actual.get(1)); // is not empty
+    }
 
+    @Test
+    void test_final_state_t() {
+        String stateStr = "/\\\\ f = TRUE" +
+                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
+                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
+                "/\\\\ res = [ body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] },  code |-> 201 ]";
 
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+        assert(state.isFinalState());
+    }
+
+    @Test
+    void test_final_state_f() {
+        String stateStr = "/\\\\ f = FALSE" +
+                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
+                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
+                "/\\\\ res = [ body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] },  code |-> 201 ]";
+
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+        assert(!state.isFinalState());
     }
 }
