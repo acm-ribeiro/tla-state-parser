@@ -29,3 +29,6 @@ Thumbs.db
 *.classpath
 
 
+# ANTLR
+*.interp
+*.tokens
