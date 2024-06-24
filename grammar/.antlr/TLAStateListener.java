@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from /Users/acm.ribeiro/Desktop/MAGMA/tla-state-parser/grammar/TLAState.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -26,26 +26,6 @@ public interface TLAStateListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStateElement(TLAStateParser.StateElementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TLAStateParser#tagState}.
-	 * @param ctx the parse tree
-	 */
-	void enterTagState(TLAStateParser.TagStateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TLAStateParser#tagState}.
-	 * @param ctx the parse tree
-	 */
-	void exitTagState(TLAStateParser.TagStateContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TLAStateParser#tags}.
-	 * @param ctx the parse tree
-	 */
-	void enterTags(TLAStateParser.TagsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TLAStateParser#tags}.
-	 * @param ctx the parse tree
-	 */
-	void exitTags(TLAStateParser.TagsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TLAStateParser#resState}.
 	 * @param ctx the parse tree

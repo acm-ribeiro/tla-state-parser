@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from /Users/acm.ribeiro/Desktop/MAGMA/tla-state-parser/grammar/TLAState.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class TLAStateParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -95,7 +95,7 @@ public class TLAStateParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "java-escape"; }
+	public String getGrammarFileName() { return "TLAState.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -123,19 +123,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_state; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterState(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitState(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitState(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StateContext state() throws RecognitionException {
@@ -203,19 +190,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stateElement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterStateElement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitStateElement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitStateElement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StateElementContext stateElement() throws RecognitionException {
@@ -272,7 +246,7 @@ public class TLAStateParser extends Parser {
 				setState(85);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
-				while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
@@ -323,19 +297,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tagState; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterTagState(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitTagState(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitTagState(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TagStateContext tagState() throws RecognitionException {
@@ -382,19 +343,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tags; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterTags(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitTags(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitTags(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TagsContext tags() throws RecognitionException {
@@ -460,19 +408,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_resState; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterResState(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitResState(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitResState(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ResStateContext resState() throws RecognitionException {
@@ -515,19 +450,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_responseRecord; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterResponseRecord(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitResponseRecord(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitResponseRecord(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ResponseRecordContext responseRecord() throws RecognitionException {
@@ -569,19 +491,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_code; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterCode(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitCode(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitCode(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CodeContext code() throws RecognitionException {
@@ -617,19 +526,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_codeID; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterCodeID(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitCodeID(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitCodeID(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CodeIDContext codeID() throws RecognitionException {
@@ -675,19 +571,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_entity; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterEntity(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitEntity(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitEntity(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EntityContext entity() throws RecognitionException {
@@ -735,19 +618,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_map; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterMap(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitMap(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitMap(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MapContext map() throws RecognitionException {
@@ -798,19 +668,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_mapElement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterMapElement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitMapElement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitMapElement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MapElementContext mapElement() throws RecognitionException {
@@ -856,19 +713,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_record; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterRecord(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitRecord(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitRecord(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final RecordContext record() throws RecognitionException {
@@ -924,19 +768,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_recordElement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterRecordElement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitRecordElement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitRecordElement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final RecordElementContext recordElement() throws RecognitionException {
@@ -976,19 +807,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_fieldValue; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterFieldValue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitFieldValue(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitFieldValue(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FieldValueContext fieldValue() throws RecognitionException {
@@ -1055,19 +873,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_set; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterSet(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitSet(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitSet(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SetContext set() throws RecognitionException {
@@ -1082,7 +887,7 @@ public class TLAStateParser extends Parser {
 			setState(168);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((_la) & ~0x3f) == 0 && ((1L << _la) & 234881024L) != 0) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 234881024L) != 0)) {
 				{
 				{
 				setState(165);
@@ -1132,19 +937,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_setElement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterSetElement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitSetElement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitSetElement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SetElementContext setElement() throws RecognitionException {
@@ -1247,19 +1039,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_fState; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterFState(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitFState(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitFState(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FStateContext fState() throws RecognitionException {
@@ -1295,19 +1074,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pcState; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterPcState(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitPcState(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitPcState(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PcStateContext pcState() throws RecognitionException {
@@ -1345,19 +1111,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_reqState; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterReqState(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitReqState(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitReqState(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ReqStateContext reqState() throws RecognitionException {
@@ -1409,19 +1162,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_requestRecord; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterRequestRecord(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitRequestRecord(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitRequestRecord(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final RequestRecordContext requestRecord() throws RecognitionException {
@@ -1471,19 +1211,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_operation; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterOperation(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitOperation(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitOperation(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final OperationContext operation() throws RecognitionException {
@@ -1519,19 +1246,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_operationID; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterOperationID(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitOperationID(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitOperationID(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final OperationIDContext operationID() throws RecognitionException {
@@ -1574,19 +1288,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_verb; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterVerb(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitVerb(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitVerb(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VerbContext verb() throws RecognitionException {
@@ -1622,19 +1323,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_verbID; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterVerbID(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitVerbID(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitVerbID(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VerbIDContext verbID() throws RecognitionException {
@@ -1686,19 +1374,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parameters; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterParameters(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitParameters(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitParameters(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParametersContext parameters() throws RecognitionException {
@@ -1766,19 +1441,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_body; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterBody(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitBody(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBody(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BodyContext body() throws RecognitionException {
@@ -1844,19 +1506,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_paramRecord; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterParamRecord(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitParamRecord(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitParamRecord(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParamRecordContext paramRecord() throws RecognitionException {
@@ -1934,19 +1583,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bodyRecord; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterBodyRecord(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitBodyRecord(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyRecord(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BodyRecordContext bodyRecord() throws RecognitionException {
@@ -2008,19 +1644,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bodyType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterBodyType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitBodyType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BodyTypeContext bodyType() throws RecognitionException {
@@ -2056,19 +1679,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bodyInt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterBodyInt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitBodyInt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyInt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BodyIntContext bodyInt() throws RecognitionException {
@@ -2104,19 +1714,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bodyBool; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterBodyBool(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitBodyBool(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyBool(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BodyBoolContext bodyBool() throws RecognitionException {
@@ -2156,19 +1753,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bodyObject; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterBodyObject(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitBodyObject(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitBodyObject(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BodyObjectContext bodyObject() throws RecognitionException {
@@ -2220,19 +1804,6 @@ public class TLAStateParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_objectRecord; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).enterObjectRecord(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TLAStateListener ) ((TLAStateListener)listener).exitObjectRecord(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitObjectRecord(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ObjectRecordContext objectRecord() throws RecognitionException {

@@ -22,6 +22,18 @@ public interface TLAStateVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStateElement(TLAStateParser.StateElementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TLAStateParser#tagState}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTagState(TLAStateParser.TagStateContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link TLAStateParser#tags}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTags(TLAStateParser.TagsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TLAStateParser#resState}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -171,12 +183,6 @@ public interface TLAStateVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBodyType(TLAStateParser.BodyTypeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link TLAStateParser#typeID}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTypeID(TLAStateParser.TypeIDContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TLAStateParser#bodyInt}.
 	 * @param ctx the parse tree

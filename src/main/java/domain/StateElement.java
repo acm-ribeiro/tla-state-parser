@@ -9,12 +9,15 @@ public class StateElement {
     private RequestState req;
     private ResponseState res;
     private Map<String, Entity> entities;
+    private TagState tagState;
 
-    public StateElement(FState fState, PCState pcState, RequestState requestState, ResponseState resState, Map<String, Entity> entities) {
+    public StateElement(FState fState, PCState pcState, RequestState requestState, ResponseState resState,
+                        Map<String, Entity> entities, TagState tagState) {
         f = fState;
         pc = pcState;
         req = requestState;
         res = resState;
+        this.tagState = tagState;
         this.entities = entities;
     }
 
@@ -38,11 +41,15 @@ public class StateElement {
         return entities;
     }
 
+    public TagState getTagState () {
+        return tagState;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        if(f != null)
+        if (f != null)
             s.append(f);
         else if (pc != null)
             s.append(pc);
@@ -50,13 +57,27 @@ public class StateElement {
             s.append(req);
         else if (res != null)
             s.append(res);
-        else if (entities != null) {
-            s.append("entities = {\n");
-            for (Map.Entry<String, Entity> e : entities.entrySet())
-                s.append(e.getValue().toString() + "\n");
+        else if (entities != null)
+            if (entities.isEmpty())
+                s.append("entities = {}");
+            else {
+                s.append("entities = {\n");
 
-            s.append("  }");
-        }
+                for (Map.Entry<String, Entity> e : entities.entrySet()){
+                    s.append(e.getValue().toString());
+                    s.append("\n");
+                }
+
+                s.append("  }");
+            }
+        else if (tagState != null)
+            if (tagState.getTags().isEmpty())
+                s.append("tags = {}\n");
+            else {
+                s.append("tags = {\n");
+                s.append(tagState);
+                s.append("  }");
+            }
 
         return s.toString();
     }

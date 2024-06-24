@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from /Users/acm.ribeiro/Desktop/MAGMA/tla-state-parser/grammar/TLAState.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -35,30 +35,6 @@ public class TLAStateBaseListener implements TLAStateListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStateElement(TLAStateParser.StateElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTagState(TLAStateParser.TagStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTagState(TLAStateParser.TagStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTags(TLAStateParser.TagsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTags(TLAStateParser.TagsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

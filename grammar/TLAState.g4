@@ -16,6 +16,16 @@ stateElement
     | AND reqState 
     | AND resState 
     | AND entity (AND entity)*
+    | AND tagState
+    ;
+
+tagState
+    : 'tags' EQ LCURL tags RCURL
+    ;
+
+tags
+    : NONE
+    | STRING (COMMA STRING)*
     ;
 
 resState
@@ -34,7 +44,6 @@ codeID
     : NONE
     | CODE
     ;
-
 
 entity 
     : STRING EQ LPAR map RPAR
@@ -72,7 +81,6 @@ setElement
     | NAT (COMMA NAT)*
     | record (COMMA record)*
     ;
-
 
 fState
     : 'f' EQ BOOLEAN 

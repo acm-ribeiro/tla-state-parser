@@ -2,13 +2,11 @@ package parser;
 
 import domain.*;
 import domain.Record;
+import domain.Set;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class VisitorOrientedParser {
 
@@ -29,8 +27,14 @@ public class VisitorOrientedParser {
             StateElementVisitor stateElementVisitor = new StateElementVisitor();
             List<StateElement> stateElements = new ArrayList<>();
 
-            for (TLAStateParser.StateElementContext elemCtx : ctx.stateElement())
-                stateElements.add(elemCtx.accept(stateElementVisitor));
+            for (TLAStateParser.StateElementContext elemCtx : ctx.stateElement()) {
+                StateElement stateElement = elemCtx.accept(stateElementVisitor);
+                if(stateElement.getTagState() != null) {
+                    System.out.println("we have a state element that's a tag state!!");
+                    System.out.println("# state elements = " + ctx.stateElement().size());
+                }
+                stateElements.add(stateElement);
+            }
 
             return new State(stateElements);
         }
@@ -51,10 +55,10 @@ public class VisitorOrientedParser {
             ResStateVisitor resStateVisitor = new ResStateVisitor();
             ResponseState resState = ctx.resState() != null? ctx.accept(resStateVisitor) : null;
 
-            List<TLAStateParser.EntityContext> entitiesCtx= ctx.entity() != null? ctx.entity() : null;
+            List<TLAStateParser.EntityContext> entitiesCtx = ctx.entity() != null? ctx.entity() : null;
             Map<String, Entity> entities = null;
 
-            if(entitiesCtx != null) {
+            if (!entitiesCtx.isEmpty()) {
                 EntityVisitor entityVisitor = new EntityVisitor();
                 entities = new HashMap<>();
 
@@ -64,7 +68,22 @@ public class VisitorOrientedParser {
                 }
             }
 
-            return new StateElement(fState, pcState, reqState, resState, entities);
+            TagStateVisitor tagStateVisitor = new TagStateVisitor();
+            TagState tagState = ctx.tagState() != null? ctx.accept(tagStateVisitor) : null;
+
+            return new StateElement(fState, pcState, reqState, resState, entities, tagState);
+        }
+    }
+
+    public static class TagStateVisitor extends TLAStateBaseVisitor<TagState> {
+        @Override
+        public TagState visitTagState(TLAStateParser.TagStateContext ctx) {
+            List<String> tags = new LinkedList<>();
+
+            for (TerminalNode t : ctx.tags().STRING())
+                tags.add(t.getText());
+
+            return new TagState(tags);
         }
     }
 
@@ -178,7 +197,7 @@ public class VisitorOrientedParser {
     public static class BodyRecordVisitor extends TLAStateBaseVisitor<BodyRecord> {
         @Override
         public BodyRecord visitBodyRecord(TLAStateParser.BodyRecordContext ctx) {
-            String type = ctx.bodyType().typeID().getText();
+            String type = ctx.bodyType().RTYPE().getText();
             int num = Integer.parseInt(ctx.bodyInt().NAT().getText());
             boolean bool = Boolean.parseBoolean(ctx.bodyBool().BOOLEAN().getText());
 
