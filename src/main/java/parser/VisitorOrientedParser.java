@@ -27,14 +27,9 @@ public class VisitorOrientedParser {
             StateElementVisitor stateElementVisitor = new StateElementVisitor();
             List<StateElement> stateElements = new ArrayList<>();
 
-            for (TLAStateParser.StateElementContext elemCtx : ctx.stateElement()) {
-                StateElement stateElement = elemCtx.accept(stateElementVisitor);
-                if(stateElement.getTagState() != null) {
-                    System.out.println("we have a state element that's a tag state!!");
-                    System.out.println("# state elements = " + ctx.stateElement().size());
-                }
-                stateElements.add(stateElement);
-            }
+            for (TLAStateParser.StateElementContext elemCtx : ctx.stateElement())
+                stateElements.add(elemCtx.accept(stateElementVisitor));
+
 
             return new State(stateElements);
         }
@@ -44,21 +39,21 @@ public class VisitorOrientedParser {
         @Override
         public StateElement visitStateElement(TLAStateParser.StateElementContext ctx) {
             FStateVisitor fStateVisitor = new FStateVisitor();
-            FState fState = ctx.fState() != null? ctx.accept(fStateVisitor) : null;
+            FState fState = ctx.fState() != null ? ctx.accept(fStateVisitor) : null;
 
             PCStateVisitor pcStateVisitor = new PCStateVisitor();
-            PCState pcState = ctx.pcState() != null? ctx.accept(pcStateVisitor) : null;
+            PCState pcState = ctx.pcState() != null ? ctx.accept(pcStateVisitor) : null;
 
             ReqStateVisitor reqStateVisitor = new ReqStateVisitor();
-            RequestState reqState = ctx.reqState() != null? ctx.accept(reqStateVisitor) : null;
+            RequestState reqState = ctx.reqState() != null ? ctx.accept(reqStateVisitor) : null;
 
             ResStateVisitor resStateVisitor = new ResStateVisitor();
-            ResponseState resState = ctx.resState() != null? ctx.accept(resStateVisitor) : null;
+            ResponseState resState = ctx.resState() != null ? ctx.accept(resStateVisitor) : null;
 
-            List<TLAStateParser.EntityContext> entitiesCtx = ctx.entity() != null? ctx.entity() : null;
+            List<TLAStateParser.EntityContext> entitiesCtx = ctx.entity() != null ? ctx.entity() : null;
             Map<String, Entity> entities = null;
 
-            if (!entitiesCtx.isEmpty()) {
+            if (entitiesCtx != null && !entitiesCtx.isEmpty()) {
                 EntityVisitor entityVisitor = new EntityVisitor();
                 entities = new HashMap<>();
 
@@ -69,7 +64,7 @@ public class VisitorOrientedParser {
             }
 
             TagStateVisitor tagStateVisitor = new TagStateVisitor();
-            TagState tagState = ctx.tagState() != null? ctx.accept(tagStateVisitor) : null;
+            TagState tagState = ctx.tagState() != null ? ctx.accept(tagStateVisitor) : null;
 
             return new StateElement(fState, pcState, reqState, resState, entities, tagState);
         }
@@ -118,7 +113,7 @@ public class VisitorOrientedParser {
     public static class ResponseRecordVisitor extends TLAStateBaseVisitor<Response> {
         @Override
         public Response visitResponseRecord(TLAStateParser.ResponseRecordContext ctx) {
-            Integer code = ctx.code().codeID().CODE() != null?
+            Integer code = ctx.code().codeID().CODE() != null ?
                     Integer.parseInt(ctx.code().codeID().CODE().getText()) : null;
 
             BodyVisitor bodyVisitor = new BodyVisitor();
@@ -147,29 +142,29 @@ public class VisitorOrientedParser {
     public static class ReqStateVisitor extends TLAStateBaseVisitor<RequestState> {
         @Override
         public RequestState visitReqState(TLAStateParser.ReqStateContext ctx) {
-           RequestRecordVisitor requestRecordVisitor = new RequestRecordVisitor();
-           Request request = ctx.requestRecord() != null? ctx.accept(requestRecordVisitor) : null;
-           return new RequestState(request);
+            RequestRecordVisitor requestRecordVisitor = new RequestRecordVisitor();
+            Request request = ctx.requestRecord() != null ? ctx.accept(requestRecordVisitor) : null;
+            return new RequestState(request);
         }
     }
 
     public static class RequestRecordVisitor extends TLAStateBaseVisitor<Request> {
         @Override
-        public Request visitRequestRecord (TLAStateParser.RequestRecordContext ctx) {
+        public Request visitRequestRecord(TLAStateParser.RequestRecordContext ctx) {
             String operationId = ctx.operation().operationID().getText();
             String verb = ctx.verb().verbID().getText();
 
             // If there are any parameters
             List<Parameter> parameters = new ArrayList<>();
-            if(!ctx.parameters().paramRecord().get(0).getText().isBlank())
-                for(TLAStateParser.ParamRecordContext p : ctx.parameters().paramRecord()) {
+            if (!ctx.parameters().paramRecord().get(0).getText().isBlank())
+                for (TLAStateParser.ParamRecordContext p : ctx.parameters().paramRecord()) {
                     String name = p.STRING(0).getText();
                     String value = p.STRING(1).getText();
                     parameters.add(new Parameter(name, value));
                 }
 
             BodyVisitor bodyVisitor = new BodyVisitor();
-            Body body = ctx.body() != null? ctx.body().accept(bodyVisitor) : null;
+            Body body = ctx.body() != null ? ctx.body().accept(bodyVisitor) : null;
 
             return new Request(operationId, verb, parameters, body);
         }
@@ -182,7 +177,7 @@ public class VisitorOrientedParser {
             List<TLAStateParser.BodyRecordContext> records = ctx.bodyRecord();
 
             // If the body has records
-            if(!records.get(0).getText().isBlank()) {
+            if (!records.get(0).getText().isBlank()) {
                 BodyRecordVisitor bodyRecordVisitor = new BodyRecordVisitor();
                 for (TLAStateParser.BodyRecordContext r : records) {
                     BodyRecord bodyRecord = r.accept(bodyRecordVisitor);
@@ -217,13 +212,12 @@ public class VisitorOrientedParser {
             for (TLAStateParser.RecordContext r : ctx.record()) {
                 Map<String, RecordFieldValue> elems = new HashMap<>();
 
-                for (TLAStateParser.RecordElementContext e : r.recordElement()){
-                   String name = e.STRING().getText();
+                for (TLAStateParser.RecordElementContext e : r.recordElement()) {
+                    String name = e.STRING().getText();
 
-                   RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
-                   RecordFieldValue value = e.fieldValue().accept(recordFieldValueVisitor);
-                   elems.put(name, value);
-//                   elems.add(new RecordElement(name, value));
+                    RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
+                    RecordFieldValue value = e.fieldValue().accept(recordFieldValueVisitor);
+                    elems.put(name, value);
                 }
                 records.add(new Record(elems));
             }
@@ -239,11 +233,11 @@ public class VisitorOrientedParser {
         @Override
         public RecordFieldValue visitFieldValue(TLAStateParser.FieldValueContext ctx) {
             String str = ctx.STRING() != null ? ctx.STRING().getText() : null;
-            Integer num = ctx.NAT() != null? Integer.parseInt(ctx.NAT().getText()) : null;
-            Boolean bool = ctx.BOOLEAN() != null? Boolean.parseBoolean(ctx.BOOLEAN().getText()) : null;
+            Integer num = ctx.NAT() != null ? Integer.parseInt(ctx.NAT().getText()) : null;
+            Boolean bool = ctx.BOOLEAN() != null ? Boolean.parseBoolean(ctx.BOOLEAN().getText()) : null;
 
             SetVisitor setVisitor = new SetVisitor();
-            Set set = ctx.set() != null? ctx.set().accept(setVisitor) : null;
+            Set set = ctx.set() != null ? ctx.set().accept(setVisitor) : null;
 
             return new RecordFieldValue(str, num, bool, set);
         }
@@ -279,7 +273,8 @@ public class VisitorOrientedParser {
 
             if (ctx.record() != null) {
                 RecordVisitor recordVisitor = new RecordVisitor();
-                for(TLAStateParser.RecordContext r : ctx.record())
+
+                for (TLAStateParser.RecordContext r : ctx.record())
                     recordElems.add(r.accept(recordVisitor));
             }
 
@@ -295,27 +290,14 @@ public class VisitorOrientedParser {
 
             String name;
             RecordFieldValue value;
-
-            for (TLAStateParser.RecordElementContext e : ctx.recordElement()){
+            for (TLAStateParser.RecordElementContext e : ctx.recordElement()) {
                 name = e.STRING().getText();
                 value = e.fieldValue().accept(fieldValueVisitor);
                 elems.put(name, value);
-//                elems.add(e.accept(recordElementVisitor));
             }
-
 
             return new Record(elems);
         }
     }
-
-//    public static class RecordElementVisitor extends TLAStateBaseVisitor<RecordElement> {
-//        @Override
-//        public RecordElement visitRecordElement(TLAStateParser.RecordElementContext ctx) {
-//            String name = ctx.STRING().getText();
-//            RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
-//            RecordFieldValue fieldValue = ctx.fieldValue().accept(fieldValueVisitor);
-//            return new RecordElement(name, fieldValue);
-//        }
-//    }
 
 }
