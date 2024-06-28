@@ -17,6 +17,11 @@ stateElement
     | AND resState 
     | AND entity (AND entity)*
     | AND tagState
+    | AND schemaMapping
+    ;
+
+schemaMapping
+    : 'schemaMapping' EQ record
     ;
 
 tagState
@@ -81,6 +86,7 @@ setElement
     | NAT (COMMA NAT)*
     | record (COMMA record)*
     ;
+
 
 fState
     : 'f' EQ BOOLEAN 
@@ -172,7 +178,7 @@ VERB
 
 RTYPE
     : NONE
-    | 'int' 
+    | 'num' 
     | 'boolean' 
     | 'object' 
     ;
