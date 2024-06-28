@@ -47,6 +47,10 @@ public class StateElement {
         return tagState;
     }
 
+    public SchemaMapping getSchemaMapping() {
+        return schemaMapping;
+    }
+
 
     @Override
     public String toString() {

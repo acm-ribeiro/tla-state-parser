@@ -9,6 +9,10 @@ public class SchemaMapping {
         this.record = record;
     }
 
+    public Record getRecord() {
+        return record;
+    }
+
     @Override
     public String toString() {
         return record.toString();

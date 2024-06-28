@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import parser.VisitorOrientedParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -163,6 +164,27 @@ public class ParserTest {
                 assert(ids.get(i).equals("t"));
             i++;
         }
+    }
+
+    @Test
+    void test_schemaMapping() {
+        String stateStr = "/\\\\ f = TRUE" +
+                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
+                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
+                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
+                "/\\\\ tags = {t, p}" +
+                "/\\\\ schemaMapping = [t |-> tournament, p |-> player]";
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        Map<String, String> mapping = new HashMap<>();
+        mapping.put("t", "tournament");
+        mapping.put("p", "player");
+
+        assert(mapping.equals(state.getSchemaMapping()));
+
     }
 
 }

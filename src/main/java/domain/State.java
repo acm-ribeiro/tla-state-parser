@@ -1,9 +1,7 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class State {
 
@@ -17,7 +15,25 @@ public class State {
         return elements;
     }
 
+    public Map<String, String> getSchemaMapping() {
+        Map<String, String> mapping = new HashMap<>();
+        Iterator<StateElement> it = elements.iterator();
 
+        StateElement elem;
+        SchemaMapping s = null;
+        while (s == null && it.hasNext()) {
+            elem = it.next();
+            s = elem.getSchemaMapping();
+        }
+
+        Record r = s.getRecord();
+        Map<String, RecordFieldValue> recordElems = r.getElems();
+
+        for (Entry<String, RecordFieldValue> e : recordElems.entrySet())
+            mapping.put(e.getKey(), e.getValue().toString());
+
+        return mapping;
+    }
 
     /**
      * Returns a list containing the IDs of the entities on a state.
@@ -34,7 +50,7 @@ public class State {
             elem = it.next();
             entities = elem.getEntities();
 
-            if(entities != null && !entities.isEmpty())
+            if (entities != null && !entities.isEmpty())
                 ids.addAll(elem.getEntities().keySet());
         }
 
