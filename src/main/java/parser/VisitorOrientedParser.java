@@ -66,7 +66,20 @@ public class VisitorOrientedParser {
             TagStateVisitor tagStateVisitor = new TagStateVisitor();
             TagState tagState = ctx.tagState() != null ? ctx.accept(tagStateVisitor) : null;
 
-            return new StateElement(fState, pcState, reqState, resState, entities, tagState);
+            SchemaMappingVisitor schemaMappingVisitor = new SchemaMappingVisitor();
+            SchemaMapping schemaMapping = ctx.schemaMapping() != null? ctx.accept(schemaMappingVisitor) : null;
+
+            return new StateElement(fState, pcState, reqState, resState, entities, tagState, schemaMapping);
+        }
+    }
+
+    public static class SchemaMappingVisitor extends TLAStateBaseVisitor<SchemaMapping> {
+        @Override
+        public SchemaMapping visitSchemaMapping(TLAStateParser.SchemaMappingContext ctx) {
+            RecordVisitor recordVisitor = new RecordVisitor();
+            Record record = ctx.record() != null? ctx.accept(recordVisitor) : null;
+
+            return new SchemaMapping(record);
         }
     }
 

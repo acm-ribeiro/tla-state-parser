@@ -1,7 +1,6 @@
 import domain.Entity;
 import domain.State;
 import domain.StateElement;
-import org.antlr.v4.runtime.BaseErrorListener;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import parser.VisitorOrientedParser;
@@ -125,4 +124,45 @@ public class ParserTest {
 
         System.out.println(state.toString());
     }
+
+    @Test
+    void test_getTransitionLabel() {
+        String stateStr = "/\\\\ f = TRUE" +
+                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
+                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
+                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
+                "/\\\\ tags = {t, p}";
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        String label = state.getTransitionLabel();
+        assert(label.equals("deleteTournament"));
+    }
+    @Test
+    void test_getEntitiesIDs() {
+        String stateStr = "/\\\\ f = TRUE" +
+                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
+                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
+                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
+                "/\\\\ tags = {t, p}" +
+                "/\\\\ schemaMapping = [t |-> tournaments, p |-> players]";
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        List<String> ids = state.getEntitiesID();
+
+        int i = 0;
+        while (i < ids.size()) {
+            if (i == 0)
+                assert(ids.get(i).equals("p"));
+            else
+                assert(ids.get(i).equals("t"));
+            i++;
+        }
+    }
+
 }

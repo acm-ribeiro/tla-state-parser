@@ -22,6 +22,12 @@ public interface TLAStateVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStateElement(TLAStateParser.StateElementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TLAStateParser#schemaMapping}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSchemaMapping(TLAStateParser.SchemaMappingContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TLAStateParser#tagState}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

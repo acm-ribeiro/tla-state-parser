@@ -10,15 +10,17 @@ public class StateElement {
     private ResponseState res;
     private Map<String, Entity> entities;
     private TagState tagState;
+    private SchemaMapping schemaMapping;
 
     public StateElement(FState fState, PCState pcState, RequestState requestState, ResponseState resState,
-                        Map<String, Entity> entities, TagState tagState) {
+                        Map<String, Entity> entities, TagState tagState, SchemaMapping schemaMapping) {
         f = fState;
         pc = pcState;
         req = requestState;
         res = resState;
-        this.tagState = tagState;
         this.entities = entities;
+        this.tagState = tagState;
+        this.schemaMapping = schemaMapping;
     }
 
     public FState getF() {
@@ -44,6 +46,7 @@ public class StateElement {
     public TagState getTagState () {
         return tagState;
     }
+
 
     @Override
     public String toString() {
@@ -78,6 +81,8 @@ public class StateElement {
                 s.append(tagState);
                 s.append("  }");
             }
+        else if (schemaMapping != null)
+            s.append(schemaMapping);
 
         return s.toString();
     }

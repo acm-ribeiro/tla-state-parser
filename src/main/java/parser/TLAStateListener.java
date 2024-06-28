@@ -27,6 +27,16 @@ public interface TLAStateListener extends ParseTreeListener {
 	 */
 	void exitStateElement(TLAStateParser.StateElementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TLAStateParser#schemaMapping}.
+	 * @param ctx the parse tree
+	 */
+	void enterSchemaMapping(TLAStateParser.SchemaMappingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLAStateParser#schemaMapping}.
+	 * @param ctx the parse tree
+	 */
+	void exitSchemaMapping(TLAStateParser.SchemaMappingContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TLAStateParser#tagState}.
 	 * @param ctx the parse tree
 	 */

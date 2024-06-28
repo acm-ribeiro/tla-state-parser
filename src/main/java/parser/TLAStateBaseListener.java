@@ -40,6 +40,18 @@ public class TLAStateBaseListener implements TLAStateListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSchemaMapping(TLAStateParser.SchemaMappingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSchemaMapping(TLAStateParser.SchemaMappingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTagState(TLAStateParser.TagStateContext ctx) { }
 	/**
 	 * {@inheritDoc}

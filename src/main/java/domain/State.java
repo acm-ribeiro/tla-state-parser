@@ -1,6 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class State {
 
@@ -12,6 +15,50 @@ public class State {
 
     public List<StateElement> getElements() {
         return elements;
+    }
+
+
+
+    /**
+     * Returns a list containing the IDs of the entities on a state.
+     *
+     * @return entities IDs.
+     */
+    public List<String> getEntitiesID() {
+        List<String> ids = new ArrayList<>();
+        Iterator<StateElement> it = elements.iterator();
+
+        StateElement elem;
+        Map<String, Entity> entities;
+        while(ids.isEmpty() && it.hasNext()) {
+            elem = it.next();
+            entities = elem.getEntities();
+
+            if(entities != null && !entities.isEmpty())
+                ids.addAll(elem.getEntities().keySet());
+        }
+
+        return ids;
+    }
+
+    /**
+     * Returns the state's transition label.
+     *
+     * @return transition label.
+     */
+    public String getTransitionLabel() {
+        String label = null;
+        Iterator<StateElement> it = elements.iterator();
+
+        StateElement elem;
+        while (label == null && it.hasNext()) {
+            elem = it.next();
+
+            if (elem.getReq() != null)
+                label = elem.getReq().getRequestRecord().getOperationId();
+        }
+
+        return label;
     }
 
     /**
@@ -34,8 +81,12 @@ public class State {
         StringBuilder s = new StringBuilder();
         s.append("state = {\n");
 
-        for (StateElement e : elements)
-            s.append("  " + e.toString() + "\n");
+        for (StateElement e : elements){
+            s.append("  ");
+            s.append(e.toString());
+            s.append("\n");
+        }
+
 
         s.append("}");
 
