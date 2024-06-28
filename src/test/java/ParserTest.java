@@ -168,20 +168,20 @@ public class ParserTest {
 
     @Test
     void test_schemaMapping() {
-        String stateStr = "/\\\\ f = TRUE" +
-                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
+        String stateStr = "/\\\\ f = FALSE" +
+                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
+                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
-                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
-                "/\\\\ tags = {t, p}" +
-                "/\\\\ schemaMapping = [t |-> tournament, p |-> player]";
+                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {} ]" +
+                "/\\\\ res = [ body |-> {[type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}]},  code |-> 200 ]" +
+                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ tags = {t}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
         Map<String, String> mapping = new HashMap<>();
-        mapping.put("t", "tournament");
-        mapping.put("p", "player");
+        mapping.put("t", "Tournament");
+        mapping.put("p", "Player");
 
         assert(mapping.equals(state.getSchemaMapping()));
 
