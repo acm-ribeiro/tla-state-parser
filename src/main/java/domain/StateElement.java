@@ -23,6 +23,16 @@ public class StateElement {
         this.schemaMapping = schemaMapping;
     }
 
+    /**
+     * Returns the number of records within the given entity.
+     * E.g. p = (p1 :> [...], p2 :> [...]) will return 2.
+     *
+     * @return number of records.
+     */
+    public int getNumRecords(String entityName) {
+        return entities.get(entityName).getNumRecords();
+    }
+
     public FState getF() {
         return f;
     }

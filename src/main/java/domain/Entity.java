@@ -19,6 +19,10 @@ public class Entity {
         this.name = name;
     }
 
+    public int getNumRecords() {
+        return records.size();
+    }
+
     public Map<String, Record>  getRecords () {
         return records;
     }

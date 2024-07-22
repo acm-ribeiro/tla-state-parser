@@ -36,6 +36,29 @@ public class State {
     }
 
     /**
+     * Returns the number of records of the given entity.
+     * @param entityName entity name (e.g. "p" or "t")
+     *
+     * @return number of records of the entity.
+     */
+    public int getNumRecords(String entityName) {
+        Entity e = null;
+        Iterator<StateElement> it = elements.iterator();
+
+        StateElement elem;
+        Map<String, Entity> entities;
+        while(it.hasNext()) {
+            elem = it.next();
+            entities = elem.getEntities();
+
+            if (entities != null && !entities.isEmpty())
+                e = entities.get(entityName);
+        }
+
+        return e.getNumRecords();
+    }
+
+    /**
      * Returns a list containing the IDs of the entities on a state.
      *
      * @return entities IDs.

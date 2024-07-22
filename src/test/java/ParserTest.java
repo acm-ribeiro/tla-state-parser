@@ -187,4 +187,22 @@ public class ParserTest {
 
     }
 
+    @Test
+    void test_getEntity() {
+        String stateStr = "/\\\\ f = FALSE" +
+                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
+                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {} ]" +
+                "/\\\\ res = [ body |-> {[type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}]},  code |-> 200 ]" +
+                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ tags = {t}";
+
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        assert (state.getNumRecords("p") == 2);
+        assert (state.getNumRecords("t") == 2);
+    }
+
 }
