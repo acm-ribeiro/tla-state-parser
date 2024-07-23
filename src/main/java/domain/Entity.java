@@ -1,17 +1,14 @@
 package domain;
 
-import org.stringtemplate.v4.ST;
-
 import java.util.Iterator;
-import java.util.Set;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class Entity {
 
     private static final String STATUS_ELEMENT = "s";
-    private String name;
-    private Map<String, Record> records;
+    private final String name;
+    private final Map<String, Record> records;
 
     // p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )
     public Entity (String name, Map<String, Record> elements) {
@@ -23,7 +20,11 @@ public class Entity {
         return records.size();
     }
 
-    public Map<String, Record>  getRecords () {
+    public Record getRecordById(String recordId) {
+        return records.get(recordId);
+    }
+
+    public Map<String, Record> getRecords() {
         return records;
     }
 
@@ -54,10 +55,10 @@ public class Entity {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("    " + name + " = {\n");
+        s.append("    ").append(name).append(" = {\n");
 
         for (Entry<String, Record> e: records.entrySet())
-            s.append("      " + e.getKey() + " = {\n" + e.getValue().toString());
+            s.append("      ").append(e.getKey()).append(" = {\n").append(e.getValue().toString());
 
         s.append("\n    }");
         return s.toString();

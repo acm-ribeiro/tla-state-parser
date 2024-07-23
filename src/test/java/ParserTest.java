@@ -1,4 +1,5 @@
 import domain.Entity;
+import domain.Record;
 import domain.State;
 import domain.StateElement;
 import org.junit.jupiter.api.Disabled;
@@ -226,4 +227,44 @@ public class ParserTest {
         assert(schemaMapping.get("t").equalsIgnoreCase("Tournament"));
     }
 
+    @Test
+    void test_getEntities() {
+        String stateStr = "/\\\\ f = FALSE" +
+                "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
+                "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
+                "/\\\\ res = [body |-> {}, code |-> None]" +
+                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ tags = {None}";
+
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+        Map<String, Entity> entities = state.getEntities();
+
+        assert(entities != null);
+        assert(!entities.isEmpty());
+        assert(entities.containsKey("p"));
+        assert(entities.containsKey("t"));
+    }
+
+    @Test
+    void test_getRecordById() {
+        String stateStr = "/\\\\ f = FALSE" +
+                "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
+                "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
+                "/\\\\ res = [body |-> {}, code |-> None]" +
+                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ tags = {None}";
+
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        Map<String, Entity> entities = state.getEntities();
+        Entity p = entities.get("p");
+        Record p1 = p.getRecordById("p1");
+        assert (p1 != null);
+    }
 }

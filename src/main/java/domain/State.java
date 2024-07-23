@@ -69,7 +69,7 @@ public class State {
 
         StateElement elem;
         Map<String, Entity> entities;
-        while(ids.isEmpty() && it.hasNext()) {
+        while (ids.isEmpty() && it.hasNext()) {
             elem = it.next();
             entities = elem.getEntities();
 
@@ -78,6 +78,24 @@ public class State {
         }
 
         return ids;
+    }
+
+    /**
+     * Returns a map of this state's entities.
+     * An entity is a set of records, e.g. p = {p1 :> [...], p2:> [...]}
+     * key: p
+     * value: the set of records
+     *
+     * @return entities map
+     */
+    public Map<String, Entity> getEntities() {
+        Map<String, Entity> entities = null;
+        Iterator<StateElement> it = elements.iterator();
+
+        while (it.hasNext() && entities == null)
+            entities = it.next().getEntities() ;
+
+        return entities;
     }
 
     /**
