@@ -205,4 +205,25 @@ public class ParserTest {
         assert (state.getNumRecords("t") == 2);
     }
 
+    @Test
+    void test_schemaMapping_init() {
+        String stateStr = "/\\\\ f = FALSE" +
+                "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
+                "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
+                "/\\\\ res = [body |-> {}, code |-> None]" +
+                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ tags = {None}";
+
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        Map<String, String> schemaMapping = state.getSchemaMapping();
+
+        assert(schemaMapping!= null);
+        assert(schemaMapping.get("p").equalsIgnoreCase("Player"));
+        assert(schemaMapping.get("t").equalsIgnoreCase("Tournament"));
+    }
+
 }
