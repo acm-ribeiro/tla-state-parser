@@ -104,10 +104,12 @@ public class VisitorOrientedParser {
             List<TLAStateParser.MapElementContext> elemsCtx = ctx.map().mapElement();
             RecordVisitor recordVisitor = new RecordVisitor();
 
+            String recordId;
             for (TLAStateParser.MapElementContext elemCtx : elemsCtx) {
+                recordId = elemCtx.STRING().getText();
                 Record r = elemCtx.record().accept(recordVisitor);
-                String key = elemCtx.STRING().getText();
-                records.put(key, r);
+                r.setId(recordId);
+                records.put(recordId, r);
             }
 
             return new Entity(name, records);

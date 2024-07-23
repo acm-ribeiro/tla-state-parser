@@ -263,8 +263,9 @@ public class ParserTest {
         State state = parser.parse(stateStr);
 
         Map<String, Entity> entities = state.getEntities();
-        Entity p = entities.get("p");
+        Entity p = entities.get("p"); // entity name
         Record p1 = p.getRecordById("p1");
+
         assert (p1 != null);
     }
 }

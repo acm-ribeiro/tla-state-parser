@@ -5,10 +5,19 @@ import java.util.Map.Entry;
 
 public class Record {
 
-    private Map<String, RecordFieldValue> elems;
+    private String id;
+    private final Map<String, RecordFieldValue> elems;
 
     public Record(Map<String, RecordFieldValue> elems) {
         this.elems = elems;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Map<String, RecordFieldValue> getElems() {
@@ -24,7 +33,7 @@ public class Record {
         StringBuilder s = new StringBuilder();
 
         for(Entry<String, RecordFieldValue> e : elems.entrySet())
-            s.append("        " + e.getKey() + " = " + e.getValue() + "\n");
+            s.append("        ").append(e.getKey()).append(" = ").append(e.getValue()).append("\n");
 
         s.deleteCharAt(s.length()-1);
         s.append("      }\n");
