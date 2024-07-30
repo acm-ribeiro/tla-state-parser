@@ -23,8 +23,9 @@ public class ParserTest {
                 "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {n1}, c |-> 1] @@  " +
                             "i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postEnrollment,  verb |-> post,  params |->      { [name |-> tournamentId, value |-> i1],        [name |-> playerNIF, value |-> n1] },  body |-> {} ]" +
-                "/\\\\ res = [ body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[player |-> n1, tournament |-> i1]} ] },  code |-> 200 ]";
+                "/\\\\ req = [ op |-> postEnrollment,  verb |-> post,  params |->      { [name " +
+                "|-> tournamentId, value |-> i1],        [name |-> playerNIF, value |-> n1] },  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |->       [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[player |-> n1, tournament |-> i1]} ] ,  code |-> 200 ]";
 
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
@@ -38,8 +39,8 @@ public class ParserTest {
                 "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
                 "/\\\\ t = ( i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
-                "/\\\\ res = [body |-> {}, code |-> None]";
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]";
 
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(init);
@@ -63,8 +64,8 @@ public class ParserTest {
                 "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
                 "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
-                "/\\\\ res = [ body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] },  code |-> 201 ]";
+                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |-> [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] ]" +
+                "/\\\\ res = [ body |-> [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] ,  code |-> 201 ]";
 
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
@@ -89,8 +90,8 @@ public class ParserTest {
                 "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
                 "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
-                "/\\\\ res = [ body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] },  code |-> 201 ]";
+                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->  [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] ]" +
+                "/\\\\ res = [ body |-> [ type |-> object,  int |-> 0, bool |-> FALSE, obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ],  code |-> 201]";
 
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
@@ -104,8 +105,8 @@ public class ParserTest {
                 "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
                 "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
-                "/\\\\ res = [ body |->      { [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] },  code |-> 201 ]";
+                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
+                "/\\\\ res = [ body |->  [ type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ],  code |-> 201 ]";
 
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
@@ -118,8 +119,8 @@ public class ParserTest {
                 "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
                 "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
-                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
+                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}],  code |-> 200]" +
                 "/\\\\ tags = {t, p}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
@@ -133,8 +134,8 @@ public class ParserTest {
                 "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
                 "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
-                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
+                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}],  code |-> 200]" +
                 "/\\\\ tags = {t, p}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
@@ -148,8 +149,8 @@ public class ParserTest {
                 "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
                 "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {}]" +
-                "/\\\\ res = [body |-> {[type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}]},  code |-> 200]" +
+                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}],  code |-> 200]" +
                 "/\\\\ tags = {t, p}" +
                 "/\\\\ schemaMapping = [t |-> tournaments, p |-> players]";
         VisitorOrientedParser parser = new VisitorOrientedParser();
@@ -173,8 +174,8 @@ public class ParserTest {
                 "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
                 "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {} ]" +
-                "/\\\\ res = [ body |-> {[type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}]},  code |-> 200 ]" +
+                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}],  code |-> 200 ]" +
                 "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
                 "/\\\\ tags = {t}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
@@ -194,8 +195,8 @@ public class ParserTest {
                 "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
                 "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> {} ]" +
-                "/\\\\ res = [ body |-> {[type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}]},  code |-> 200 ]" +
+                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}],  code |-> 200 ]" +
                 "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
                 "/\\\\ tags = {t}";
 
@@ -212,8 +213,8 @@ public class ParserTest {
                 "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
                 "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
-                "/\\\\ res = [body |-> {}, code |-> None]" +
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]" +
                 "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
                 "/\\\\ tags = {None}";
 
@@ -233,8 +234,8 @@ public class ParserTest {
                 "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
                 "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
-                "/\\\\ res = [body |-> {}, code |-> None]" +
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]" +
                 "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
                 "/\\\\ tags = {None}";
 
@@ -254,8 +255,8 @@ public class ParserTest {
                 "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
                 "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> {}]" +
-                "/\\\\ res = [body |-> {}, code |-> None]" +
+                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
+                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]" +
                 "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
                 "/\\\\ tags = {None}";
 

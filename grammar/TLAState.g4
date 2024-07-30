@@ -87,7 +87,6 @@ setElement
     | record (COMMA record)*
     ;
 
-
 fState
     : 'f' EQ BOOLEAN 
     ;
@@ -127,7 +126,7 @@ parameters
     ;
 
 body 
-    : 'body' ATTR LCURL bodyRecord (COMMA bodyRecord)* RCURL
+    : 'body' ATTR bodyRecord (COMMA bodyRecord)*
     ;
 
 paramRecord
@@ -141,7 +140,12 @@ bodyRecord
     ;
 
 bodyType
-    : 'type' ATTR RTYPE
+    : 'type' ATTR typeID
+    ;
+
+typeID
+    : NONE
+    | RTYPE
     ;
 
 bodyInt

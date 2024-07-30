@@ -227,6 +227,13 @@ public class TLAStateBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitTypeID(TLAStateParser.TypeIDContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitBodyInt(TLAStateParser.BodyIntContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

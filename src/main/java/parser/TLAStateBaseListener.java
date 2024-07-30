@@ -376,6 +376,18 @@ public class TLAStateBaseListener implements TLAStateListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTypeID(TLAStateParser.TypeIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeID(TLAStateParser.TypeIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBodyInt(TLAStateParser.BodyIntContext ctx) { }
 	/**
 	 * {@inheritDoc}

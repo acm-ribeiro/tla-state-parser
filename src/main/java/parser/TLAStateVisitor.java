@@ -190,6 +190,12 @@ public interface TLAStateVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBodyType(TLAStateParser.BodyTypeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TLAStateParser#typeID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeID(TLAStateParser.TypeIDContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TLAStateParser#bodyInt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

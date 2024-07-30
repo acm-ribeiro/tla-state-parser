@@ -307,6 +307,16 @@ public interface TLAStateListener extends ParseTreeListener {
 	 */
 	void exitBodyType(TLAStateParser.BodyTypeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TLAStateParser#typeID}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeID(TLAStateParser.TypeIDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLAStateParser#typeID}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeID(TLAStateParser.TypeIDContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TLAStateParser#bodyInt}.
 	 * @param ctx the parse tree
 	 */

@@ -207,7 +207,8 @@ public class VisitorOrientedParser {
     public static class BodyRecordVisitor extends TLAStateBaseVisitor<BodyRecord> {
         @Override
         public BodyRecord visitBodyRecord(TLAStateParser.BodyRecordContext ctx) {
-            String type = ctx.bodyType().RTYPE().getText();
+            String type = ctx.bodyType().typeID().RTYPE() != null?
+                    ctx.bodyType().typeID().RTYPE().getText() : null;
             int num = Integer.parseInt(ctx.bodyInt().NAT().getText());
             boolean bool = Boolean.parseBoolean(ctx.bodyBool().BOOLEAN().getText());
 
