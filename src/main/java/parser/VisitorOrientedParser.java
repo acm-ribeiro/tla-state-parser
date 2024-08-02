@@ -31,7 +31,7 @@ public class VisitorOrientedParser {
                 stateElements.add(elemCtx.accept(stateElementVisitor));
 
 
-            return new State(stateElements);
+            return new State(ctx.getText(), stateElements);
         }
     }
 

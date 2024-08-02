@@ -5,10 +5,16 @@ import java.util.Map.Entry;
 
 public class State {
 
+    private String original;
     private List<StateElement> elements;
 
-    public State (List<StateElement> elements) {
+    public State (String original, List<StateElement> elements) {
+        this.original = original;
         this.elements = elements;
+    }
+
+    public String getOriginal() {
+        return original;
     }
 
     public List<StateElement> getElements() {
