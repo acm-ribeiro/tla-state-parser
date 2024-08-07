@@ -4,13 +4,13 @@ import java.util.Map;
 
 public class StateElement {
 
-    private FState f;
-    private PCState pc;
-    private RequestState req;
-    private ResponseState res;
-    private Map<String, Entity> entities;
-    private TagState tagState;
-    private SchemaMapping schemaMapping;
+    private final FState f;
+    private final PCState pc;
+    private final RequestState req;
+    private final ResponseState res;
+    private final Map<String, Entity> entities;
+    private final TagState tagState;
+    private final SchemaMapping schemaMapping;
 
     public StateElement(FState fState, PCState pcState, RequestState requestState, ResponseState resState,
                         Map<String, Entity> entities, TagState tagState, SchemaMapping schemaMapping) {
@@ -21,6 +21,15 @@ public class StateElement {
         this.entities = entities;
         this.tagState = tagState;
         this.schemaMapping = schemaMapping;
+    }
+
+    /**
+     * Checks whether this state element is an entity.
+     *
+     * @return true if the element is an entity; false otherwise.
+     */
+    public boolean isEntity() {
+        return entities != null && !entities.isEmpty();
     }
 
     /**
@@ -56,6 +65,7 @@ public class StateElement {
     public TagState getTagState () {
         return tagState;
     }
+
 
     public SchemaMapping getSchemaMapping() {
         return schemaMapping;

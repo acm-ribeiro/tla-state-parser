@@ -5,22 +5,60 @@ import java.util.Map.Entry;
 
 public class State {
 
-    private String original;
-    private List<StateElement> elements;
+    private final String original;
+    private final List<StateElement> elements;
+    private Map<String, Entity> entities;
 
     public State (String original, List<StateElement> elements) {
         this.original = original;
         this.elements = elements;
+
+        entities = new HashMap<>();
+        for (StateElement elem : elements)
+            if (elem.isEntity())
+                entities.putAll(elem.getEntities());
     }
 
+    /**
+     * Returns the original string, before parsing.
+     *
+     * @return original state string representation.
+     */
     public String getOriginal() {
         return original;
     }
 
+    /**
+     * Returns the tags list.
+     *
+     * @return tag list.
+     */
+    public List<String> getTags() {
+        List<String> tags = null;
+        Iterator<StateElement> it = elements.iterator();
+
+        while (it.hasNext() && tags == null){
+            StateElement elem = it.next();
+            tags = elem.getTagState() != null? elem.getTagState().getTags() : null;
+        }
+
+        return tags;
+    }
+
+    /**
+     * Returns the state's elements.
+     *
+     * @return state elements.
+     */
     public List<StateElement> getElements() {
         return elements;
     }
 
+    /**
+     * Returns the schema mapping to entities.
+     *
+     * @return schema mapping.
+     */
     public Map<String, String> getSchemaMapping() {
         Map<String, String> mapping = new HashMap<>();
         Iterator<StateElement> it = elements.iterator();
@@ -32,11 +70,12 @@ public class State {
             s = elem.getSchemaMapping();
         }
 
-        Record r = s.getRecord();
-        Map<String, RecordFieldValue> recordElems = r.getElems();
+        Record r = s != null? s.getRecord() : null;
+        Map<String, RecordFieldValue> recordElems = r != null? r.getElems() : null;
 
-        for (Entry<String, RecordFieldValue> e : recordElems.entrySet())
-            mapping.put(e.getKey(), e.getValue().toString());
+        if (recordElems != null)
+            for (Entry<String, RecordFieldValue> e : recordElems.entrySet())
+                mapping.put(e.getKey(), e.getValue().toString());
 
         return mapping;
     }
@@ -48,20 +87,8 @@ public class State {
      * @return number of records of the entity.
      */
     public int getNumRecords(String entityName) {
-        Entity e = null;
-        Iterator<StateElement> it = elements.iterator();
-
-        StateElement elem;
-        Map<String, Entity> entities;
-        while(it.hasNext()) {
-            elem = it.next();
-            entities = elem.getEntities();
-
-            if (entities != null && !entities.isEmpty())
-                e = entities.get(entityName);
-        }
-
-        return e.getNumRecords();
+        Entity e = entities.get(entityName);
+        return e != null? e.getNumRecords() : -1;
     }
 
     /**
@@ -70,20 +97,7 @@ public class State {
      * @return entities IDs.
      */
     public List<String> getEntitiesID() {
-        List<String> ids = new ArrayList<>();
-        Iterator<StateElement> it = elements.iterator();
-
-        StateElement elem;
-        Map<String, Entity> entities;
-        while (ids.isEmpty() && it.hasNext()) {
-            elem = it.next();
-            entities = elem.getEntities();
-
-            if (entities != null && !entities.isEmpty())
-                ids.addAll(elem.getEntities().keySet());
-        }
-
-        return ids;
+        return entities.keySet().stream().toList();
     }
 
     /**
@@ -95,12 +109,6 @@ public class State {
      * @return entities map
      */
     public Map<String, Entity> getEntities() {
-        Map<String, Entity> entities = null;
-        Iterator<StateElement> it = elements.iterator();
-
-        while (it.hasNext() && entities == null)
-            entities = it.next().getEntities() ;
-
         return entities;
     }
 
@@ -149,8 +157,6 @@ public class State {
             s.append(e.toString());
             s.append("\n");
         }
-
-
         s.append("}");
 
         return s.toString();

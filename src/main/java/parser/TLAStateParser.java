@@ -217,7 +217,8 @@ public class TLAStateParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAStateVisitor) return ((TLAStateVisitor<? extends T>)visitor).visitStateElement(this);
+			if ( visitor instanceof TLAStateVisitor)
+				return ((TLAStateVisitor<? extends T>)visitor).visitStateElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}

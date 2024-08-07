@@ -15,258 +15,195 @@ import java.util.Map.Entry;
 public class ParserTest {
 
     @Test
-    @Disabled
-    void test_single_state() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {i1}, a |-> 0, s |-> TRUE] @@  " +
-                            "n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {n1}, c |-> 1] @@  " +
-                            "i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
-                "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postEnrollment,  verb |-> post,  params |->      { [name " +
-                "|-> tournamentId, value |-> i1],        [name |-> playerNIF, value |-> n1] },  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
-                "/\\\\ res = [ body |->       [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[player |-> n1, tournament |-> i1]} ] ,  code |-> 200 ]";
-
-        VisitorOrientedParser parser = new VisitorOrientedParser();
-        State state = parser.parse(stateStr);
-        System.out.println(state);
-    }
-
-    @Test
-    @Disabled
-    void test_initial_state_empty() {
-        String init ="/\\\\ f = FALSE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
-                "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]";
-
-        VisitorOrientedParser parser = new VisitorOrientedParser();
-        State state = parser.parse(init);
-        List<Boolean> actual = new ArrayList<>();
-
-        List<StateElement> elems = state.getElements();
-        for(StateElement elem : elems) {
-           Map<String, Entity> entities = elem.getEntities() != null? elem.getEntities() : null;
-           if (entities != null)
-               for (Entry<String, Entity> e : entities.entrySet())
-                   actual.add(e.getValue().isEmpty());
-        }
-
-        assert(!actual.contains(false));
-
-    }
-    @Test
-    @Disabled
-    void test_initial_state_not_empty() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
-                "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |-> [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] ]" +
-                "/\\\\ res = [ body |-> [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ] ,  code |-> 201 ]";
-
-        VisitorOrientedParser parser = new VisitorOrientedParser();
-        State state = parser.parse(stateStr);
-        List<Boolean> actual = new ArrayList<>();
-
-        List<StateElement> elems = state.getElements();
-        for(StateElement elem : elems) {
-            Map<String, Entity> entities = elem.getEntities() != null? elem.getEntities() : null;
-            if (entities != null)
-                for (Entry<String, Entity> e : entities.entrySet())
-                    actual.add(e.getValue().isEmpty());
-        }
-
-        assert(actual.get(0));  // is empty
-        assert(!actual.get(1)); // is not empty
-    }
-
-    @Test
-    @Disabled
     void test_final_state_t() {
-        String stateStr = "/\\\\ f = TRUE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
+        String stateStr =
+                "/\\\\ f = TRUE" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |->  [ type |-> object,          int |-> 0,          bool |-> FALSE,          obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] ]" +
-                "/\\\\ res = [ body |-> [ type |-> object,  int |-> 0, bool |-> FALSE, obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ],  code |-> 201]";
-
+                "/\\\\ req = [ op |-> deletePlayer,  verb |-> delete,  params |-> {[name |-> pid, value |-> p1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [ type |-> object, int |-> 0, bool |-> FALSE,  obj |-> {[pid |-> p1, s |-> FALSE, ts |-> {}]} ],  code |-> 200 ]" +
+                "/\\\\ tournaments = ( t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1] @@  t2 :> [tid |-> t2, s |-> FALSE, ps |-> {}, c |-> 1] )" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = ( p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}] @@  p2 :> [pid |-> p2, s |-> FALSE, ts |-> {}] )" +
+                "/\\\\ enrollments = ( e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE] @@  e2 :> [eid |-> e2, pid |-> p1, tid |-> t1, s |-> FALSE] )" +
+                "/\\\\ tags = {tournaments, players, enrollments}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
         assert(state.isFinalState());
     }
 
     @Test
-    @Disabled
     void test_final_state_f() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
+        String stateStr =
+                "/\\\\ f = FALSE" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> postTournament,  verb |-> post,  params |-> {},  body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]} ] } ]" +
-                "/\\\\ res = [ body |->  [ type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1]} ],  code |-> 201 ]";
-
+                "/\\\\ req = [ op |-> None,  verb |-> None,  params |-> {},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}],  code |-> None ]" +
+                "/\\\\ tournaments = (t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1])" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = (p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}])" +
+                "/\\\\ enrollments = (e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE])" +
+                "/\\\\ tags = {None}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
         assert(!state.isFinalState());
     }
 
     @Test
-    void test_tags() {
-        String stateStr = "/\\\\ f = TRUE" +
-                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
+    void test_tagsEmpty() {
+        String stateStr =
+                "/\\\\ f = FALSE" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}],  code |-> 200]" +
-                "/\\\\ tags = {t, p}";
+                "/\\\\ req = [ op |-> None,  verb |-> None,  params |-> {},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}],  code |-> None ]" +
+                "/\\\\ tournaments = (t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1])" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = (p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}])" +
+                "/\\\\ enrollments = (e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE])" +
+                "/\\\\ tags = {None}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
-        System.out.println(state.toString());
+        List<String> tags = state.getTags();
+        assert (tags.isEmpty());
+    }
+
+    @Test
+    void test_tags() {
+        String stateStr = "/\\\\ f = TRUE" +
+                "/\\\\ pc = TRUE" +
+                "/\\\\ req = [ op |-> deleteTournament, verb |-> delete,  params |-> {[name |-> tid, value |-> t1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [ type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1]} ],  code |-> 200 ]" +
+                "/\\\\ tournaments = ( t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1] @@  t2 :> [tid |-> t2, s |-> FALSE, ps |-> {}, c |-> 1] )" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = ( p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}] @@  p2 :> [pid |-> p2, s |-> FALSE, ts |-> {}] )" +
+                "/\\\\ enrollments = ( e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE] @@  e2 :> [eid |-> e2, pid |-> p1, tid |-> t1, s |-> FALSE] )" +
+                "/\\\\ tags = {tournaments, players}";
+        VisitorOrientedParser parser = new VisitorOrientedParser();
+        State state = parser.parse(stateStr);
+
+        List<String> tags = state.getTags();
+        assert (tags.contains("players"));
+        assert (tags.contains("tournaments"));
     }
 
     @Test
     void test_getTransitionLabel() {
         String stateStr = "/\\\\ f = TRUE" +
-                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}],  code |-> 200]" +
-                "/\\\\ tags = {t, p}";
+                "/\\\\ req = [ op |-> deletePlayer,  verb |-> delete,  params |-> {[name |-> pid, value |-> p1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [ type |-> object, int |-> 0, bool |-> FALSE,  obj |-> {[pid |-> p1, s |-> FALSE, ts |-> {}]} ],  code |-> 200 ]" +
+                "/\\\\ tournaments = ( t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1] @@  t2 :> [tid |-> t2, s |-> FALSE, ps |-> {}, c |-> 1] )" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = ( p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}] @@  p2 :> [pid |-> p2, s |-> FALSE, ts |-> {}] )" +
+                "/\\\\ enrollments = ( e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE] @@  e2 :> [eid |-> e2, pid |-> p1, tid |-> t1, s |-> FALSE] )" +
+                "/\\\\ tags = {tournaments, players, enrollments}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
         String label = state.getTransitionLabel();
-        assert(label.equals("deleteTournament"));
+        assert(label.equals("deletePlayer"));
     }
+
     @Test
     void test_getEntitiesIDs() {
-        String stateStr = "/\\\\ f = TRUE" +
-                "/\\\\ p = (n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (i1 :> [s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1])" +
+        String stateStr = "/\\\\ f = FALSE" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> deleteTournament, verb |-> delete, params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> object, int |-> 0, bool |-> FALSE, obj |-> {[s |-> FALSE, id |-> i1, ps |-> {}, c |-> 1]}],  code |-> 200]" +
-                "/\\\\ tags = {t, p}" +
-                "/\\\\ schemaMapping = [t |-> tournaments, p |-> players]";
+                "/\\\\ req = [ op |-> None,  verb |-> None,  params |-> {},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}],  code |-> None ]" +
+                "/\\\\ tournaments = (t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1])" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = (p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}])" +
+                "/\\\\ enrollments = (e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE])" +
+                "/\\\\ tags = {None}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
         List<String> ids = state.getEntitiesID();
 
-        int i = 0;
-        while (i < ids.size()) {
-            if (i == 0)
-                assert(ids.get(i).equals("p"));
-            else
-                assert(ids.get(i).equals("t"));
-            i++;
-        }
+        System.out.println(ids);
+        assert (ids.size() == 3);
+        assert (ids.contains("players"));
+        assert (ids.contains("tournaments"));
+        assert (ids.contains("enrollments"));
     }
 
     @Test
     void test_schemaMapping() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
+        String stateStr =
+                "/\\\\ f = FALSE" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
-                "/\\\\ res = [ body |-> [type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}],  code |-> 200 ]" +
-                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
-                "/\\\\ tags = {t}";
+                "/\\\\ req = [ op |-> None,  verb |-> None,  params |-> {},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}],  code |-> None ]" +
+                "/\\\\ tournaments = (t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1])" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = (p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}])" +
+                "/\\\\ enrollments = (e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE])" +
+                "/\\\\ tags = {None}";
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
-        Map<String, String> mapping = new HashMap<>();
-        mapping.put("t", "Tournament");
-        mapping.put("p", "Player");
-
-        assert(mapping.equals(state.getSchemaMapping()));
-
+        Map<String, String> mapping = state.getSchemaMapping();
+        assert (mapping.get("tournaments").equals("Tournament"));
+        assert (mapping.get("enrollments").equals("Enrollment"));
+        assert (mapping.get("players").equals("Player"));
     }
 
     @Test
     void test_getEntity() {
+        // initial state of the complete graph
         String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )" +
-                "/\\\\ t = ( i1 :> [s |-> TRUE, id |-> i1, ps |-> {}, c |-> 1] @@  i2 :> [s |-> FALSE, id |-> i2, ps |-> {}, c |-> 1] )" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [ op |-> getTournamentCapacity,  verb |-> get,  params |-> {[name |-> tournamentId, value |-> i1]},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
-                "/\\\\ res = [ body |-> [type |-> num, int |-> 1, bool |-> FALSE, obj |-> {}],  code |-> 200 ]" +
-                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
-                "/\\\\ tags = {t}";
-
-        VisitorOrientedParser parser = new VisitorOrientedParser();
-        State state = parser.parse(stateStr);
-
-        assert (state.getNumRecords("p") == 2);
-        assert (state.getNumRecords("t") == 2);
-    }
-
-    @Test
-    void test_schemaMapping_init() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
-                "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]" +
-                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ req = [ op |-> None,  verb |-> None,  params |-> {},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}],  code |-> None ]" +
+                "/\\\\ tournaments = ( t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1] @@  t2 :> [tid |-> t2, s |-> FALSE, ps |-> {}, c |-> 1] )" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = ( p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}] @@  p2 :> [pid |-> p2, s |-> FALSE, ts |-> {}] )" +
+                "/\\\\ enrollments = ( e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE] @@  e2 :> [eid |-> e2, pid |-> p1, tid |-> t1, s |-> FALSE] )" +
                 "/\\\\ tags = {None}";
-
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
-        Map<String, String> schemaMapping = state.getSchemaMapping();
-
-        assert(schemaMapping!= null);
-        assert(schemaMapping.get("p").equalsIgnoreCase("Player"));
-        assert(schemaMapping.get("t").equalsIgnoreCase("Tournament"));
-    }
-
-    @Test
-    void test_getEntities() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
-                "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]" +
-                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
-                "/\\\\ tags = {None}";
-
-        VisitorOrientedParser parser = new VisitorOrientedParser();
-        State state = parser.parse(stateStr);
-        Map<String, Entity> entities = state.getEntities();
-
-        assert(entities != null);
-        assert(!entities.isEmpty());
-        assert(entities.containsKey("p"));
-        assert(entities.containsKey("t"));
+        assert (state.getNumRecords("players") == 2);
+        assert (state.getNumRecords("tournaments") == 2);
+        assert (state.getNumRecords("enrollments") == 2);
     }
 
     @Test
     void test_getRecordById() {
-        String stateStr = "/\\\\ f = FALSE" +
-                "/\\\\ p = (p1 :> [nif |-> p1, ts |-> {}, a |-> 0, s |-> FALSE])" +
-                "/\\\\ t = (t1 :> [s |-> FALSE, id |-> t1, ps |-> {}, c |-> 1])" +
+        String stateStr =
+                "/\\\\ f = FALSE" +
                 "/\\\\ pc = TRUE" +
-                "/\\\\ req = [op |-> None, verb |-> None, params |-> {}, body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}]]" +
-                "/\\\\ res = [body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}], code |-> None]" +
-                "/\\\\ schemaMapping = [t |-> Tournament, p |-> Player]" +
+                "/\\\\ req = [ op |-> None,  verb |-> None,  params |-> {},  body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}] ]" +
+                "/\\\\ res = [ body |-> [type |-> None, int |-> 0, bool |-> FALSE, obj |-> {}],  code |-> None ]" +
+                "/\\\\ tournaments = ( t1 :> [tid |-> t1, s |-> FALSE, ps |-> {}, c |-> 1] @@  t2 :> [tid |-> t2, s |-> FALSE, ps |-> {}, c |-> 1] )" +
+                "/\\\\ schemaMapping = [ tournaments |-> Tournament,  players |-> Player,  enrollments |-> Enrollment ]" +
+                "/\\\\ players = ( p1 :> [pid |-> p1, s |-> FALSE, ts |-> {}] @@  p2 :> [pid |-> p2, s |-> FALSE, ts |-> {}] )" +
+                "/\\\\ enrollments = ( e1 :> [eid |-> e1, pid |-> p1, tid |-> t1, s |-> FALSE] @@  e2 :> [eid |-> e2, pid |-> p1, tid |-> t1, s |-> FALSE] )" +
                 "/\\\\ tags = {None}";
 
         VisitorOrientedParser parser = new VisitorOrientedParser();
         State state = parser.parse(stateStr);
 
         Map<String, Entity> entities = state.getEntities();
-        Entity p = entities.get("p"); // entity name
-        Record p1 = p.getRecordById("p1");
+
+        // Entities
+        Entity players = entities.get("players");
+        Entity tournaments = entities.get("tournaments");
+        Entity enrollments = entities.get("enrollments");
+
+        // Records
+        Record p1 = players.getRecordById("p1");
+        Record p2 = players.getRecordById("p2");
+        Record t1 = tournaments.getRecordById("t1");
+        Record t2 = tournaments.getRecordById("t2");
+        Record e1 = enrollments.getRecordById("e1");
+        Record e2 = enrollments.getRecordById("e2");
 
         assert (p1 != null);
+        assert (p2 != null);
+        assert (t1 != null);
+        assert (t2 != null);
+        assert (e1 != null);
+        assert (e2 != null);
     }
 }

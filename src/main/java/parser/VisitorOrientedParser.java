@@ -53,7 +53,7 @@ public class VisitorOrientedParser {
             List<TLAStateParser.EntityContext> entitiesCtx = ctx.entity() != null ? ctx.entity() : null;
             Map<String, Entity> entities = null;
 
-            if (entitiesCtx != null && !entitiesCtx.isEmpty()) {
+            if (entitiesCtx != null) {
                 EntityVisitor entityVisitor = new EntityVisitor();
                 entities = new HashMap<>();
 
