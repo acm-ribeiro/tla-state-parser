@@ -9,10 +9,9 @@ public class ParserTests {
 
     @Test
     public void testParser() {
-        String stateStr = "/\\ users = {}/\\ f = FALSE/\\ orders = <<>>/\\ pets = {}";
+        String stateStr = "/\\ users = {u1, u2}/\\ f = FALSE/\\ orders = <<>>/\\ pets = {p1}";
         State state = parser.parse(stateStr);
         System.out.println(state.toString());
     }
-
 
 }

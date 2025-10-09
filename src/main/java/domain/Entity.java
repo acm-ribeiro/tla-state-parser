@@ -38,22 +38,28 @@ public class Entity {
 
     @Override
     public String toString() {
-        // TODO SET
-
         StringBuilder s = new StringBuilder();
-        s.append("    ").append(name).append(" = {\n");
+        s.append("    ").append(name).append(" = ");
 
-        // To only print new line in between records
-        int i = 0;
-        int size = records.size();
+        if (!records.isEmpty()){
+            // To only print new line in between records
+            s.append("<\n");
+            int i = 0;
+            int size = records.size();
 
-        for (Entry<String, Record> e : records.entrySet()) {
-            s.append("      ").append(e.getKey()).append(" = {\n").append(e.getValue().toString());
-            if (++i < size)
-                s.append("\n"); // newline only between records
+            for (Entry<String, Record> e : records.entrySet()) {
+                s.append("      ").append(e.getKey()).append(" = {\n").append(e.getValue().toString());
+                if (++i < size)
+                    s.append("\n"); // newline only between records
+            }
+
+            s.append("\n    >");
+        }  else if (set != null) {
+            s.append(set);
+        } else {
+            s.append("<<>>");
         }
 
-        s.append("\n    }");
         return s.toString();
     }
 }

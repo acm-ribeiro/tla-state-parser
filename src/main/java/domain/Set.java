@@ -14,6 +14,8 @@ public class Set {
         return elems;
     }
 
+    public boolean isEmpty() {return elems.isEmpty();}
+
     @Override
     public String toString() {
         if(elems.isEmpty())
