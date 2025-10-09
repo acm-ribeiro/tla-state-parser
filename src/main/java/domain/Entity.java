@@ -7,11 +7,13 @@ public class Entity {
 
     private final String name;
     private final Map<String, Record> records;
+    private final Set set;
 
     // p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )
-    public Entity(String name, Map<String, Record> elements) {
+    public Entity(String name, Map<String, Record> elements, Set set) {
         this.records = elements;
         this.name = name;
+        this.set = set;
     }
 
     public int getNumRecords() {
@@ -26,12 +28,18 @@ public class Entity {
         return records;
     }
 
+    public Set getSet() {
+        return set;
+    }
+
     public String getName() {
         return name;
     }
 
     @Override
     public String toString() {
+        // TODO SET
+
         StringBuilder s = new StringBuilder();
         s.append("    ").append(name).append(" = {\n");
 

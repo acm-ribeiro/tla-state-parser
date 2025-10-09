@@ -9,10 +9,7 @@ public class ParserTests {
 
     @Test
     public void testParser() {
-        String stateStr = "/\\ f = FALSE"
-            + "/\\ tournaments = (t1 :> [ps |-> {}, c |-> 1] @@ t2 :> [ps |-> {p1}, c |-> 1])"
-            + "/\\ players = (p1 :> [ts |-> {t2}])"
-            + "/\\ enrollments = (e1 :> [pid |-> p1, tid |-> t2])";
+        String stateStr = "/\\ users = {}/\\ f = FALSE/\\ orders = <<>>/\\ pets = {}";
         State state = parser.parse(stateStr);
         System.out.println(state.toString());
     }

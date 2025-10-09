@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import domain.Entity;
 import domain.FState;
-import domain.ObjectRecord;
 import domain.Record;
 import domain.RecordFieldValue;
 import domain.Set;
@@ -37,36 +36,27 @@ public class VisitorOrientedParser {
     public static class TLAStateVisitor extends TLABaseVisitor<State> {
         @Override
         public State visitState(TLAParser.StateContext ctx) {
-            StateElementVisitor stateElementVisitor = new StateElementVisitor();
+            FStateVisitor fStateVisitor = new FStateVisitor();
+            EntityVisitor entityVisitor = new EntityVisitor();
+
+            FState f;
+            Map<String, Entity> allEntities = new HashMap<>();
             List<StateElement> stateElements = new ArrayList<>();
 
-            for (TLAParser.StateElementContext elemCtx : ctx.stateElement())
-                stateElements.add(elemCtx.accept(stateElementVisitor));
+            for (TLAParser.StateElementContext elemCtx : ctx.stateElement()) {
+                if (elemCtx.fState() != null) {
+                    f = fStateVisitor.visit(elemCtx.fState());
+                    stateElements.add(new StateElement(f, null));
+                }
 
-            return new State(ctx.getText(), stateElements);
-        }
-    }
-
-    public static class StateElementVisitor extends TLABaseVisitor<StateElement> {
-        @Override
-        public StateElement visitStateElement(TLAParser.StateElementContext ctx) {
-            FStateVisitor fStateVisitor = new FStateVisitor();
-            FState fState = ctx.fState() != null ? ctx.accept(fStateVisitor) : null;
-
-            List<TLAParser.EntityContext> entitiesCtx = ctx.entity() != null ? ctx.entity() : null;
-            Map<String, Entity> entities = null;
-
-            if (entitiesCtx != null && !entitiesCtx.isEmpty()) {
-                EntityVisitor entityVisitor = new EntityVisitor();
-                entities = new HashMap<>();
-
-                for (TLAParser.EntityContext entityCtx : entitiesCtx) {
-                    Entity e = entityCtx.accept(entityVisitor);
-                    entities.put(e.getName(), e);
+                for (TLAParser.EntityContext entityCtx : elemCtx.entity()) {
+                    Entity e = entityVisitor.visit(entityCtx);
+                    allEntities.put(e.getName(), e);
                 }
             }
+            stateElements.add(new StateElement(null, allEntities));
 
-            return new StateElement(fState, entities);
+            return new State(ctx.getText(), stateElements);
         }
     }
 
@@ -82,12 +72,17 @@ public class VisitorOrientedParser {
         @Override
         public Entity visitEntity(TLAParser.EntityContext ctx) {
             String name = ctx.STRING().getText();
-            boolean emptyMap = ctx.EMPTY_MAP() != null;
+            TLAParser.SetContext setCtx = ctx.set() != null ? ctx.set() : null;
 
+            SetVisitor setVisitor = new SetVisitor();
+            Set set = ctx.set() != null ? ctx.set().accept(setVisitor) : null;
+
+            boolean emptyMap = ctx.EMPTY_MAP() != null;
             Map<String, Record> records = new HashMap<>();
 
-            if (!emptyMap) {
-                List<TLAParser.MapElementContext> elemsCtx = ctx.map().mapElement();
+            TLAParser.MapContext mapCtx = ctx.map() != null ? ctx.map() : null;
+            if (!emptyMap && mapCtx != null) {
+                List<TLAParser.MapElementContext> elemsCtx = mapCtx.mapElement();
                 RecordVisitor recordVisitor = new RecordVisitor();
 
                 String recordId;
@@ -99,33 +94,7 @@ public class VisitorOrientedParser {
                 }
             }
 
-            return new Entity(name, records);
-        }
-    }
-
-    public static class ObjectRecordVisitor extends TLABaseVisitor<ObjectRecord> {
-        @Override
-        public ObjectRecord visitObjectRecord(TLAParser.ObjectRecordContext ctx) {
-            List<Record> records = new ArrayList<>();
-            List<String> strRecords = new ArrayList<>();
-
-            for (TLAParser.RecordContext r : ctx.record()) {
-                Map<String, RecordFieldValue> elems = new HashMap<>();
-
-                for (TLAParser.RecordElementContext e : r.recordElement()) {
-                    String name = e.STRING().getText();
-
-                    RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
-                    RecordFieldValue value = e.fieldValue().accept(recordFieldValueVisitor);
-                    elems.put(name, value);
-                }
-                records.add(new Record(elems));
-            }
-
-            for (TerminalNode str : ctx.STRING())
-                strRecords.add(str.getText());
-
-            return new ObjectRecord(records, strRecords);
+            return new Entity(name, records, set);
         }
     }
 
