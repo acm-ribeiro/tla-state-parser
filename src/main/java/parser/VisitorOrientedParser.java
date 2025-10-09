@@ -21,7 +21,6 @@ import domain.State;
 import domain.StateElement;
 
 public class VisitorOrientedParser {
-
     public State parse(String s) {
         CharStream charStream = CharStreams.fromString(s);
         TLALexer lexer = new TLALexer(charStream);
@@ -125,8 +124,9 @@ public class VisitorOrientedParser {
             List<SetElement> setElements = new ArrayList<>();
             SetElementVisitor setElementVisitor = new SetElementVisitor();
 
-            for (TLAParser.SetElementContext e : ctx.setElement())
+            for (TLAParser.SetElementContext e : ctx.setElement()) {
                 setElements.add(e.accept(setElementVisitor));
+            }
 
             return new Set(setElements);
         }
@@ -139,19 +139,24 @@ public class VisitorOrientedParser {
             List<Integer> intElems = new ArrayList<>();
             List<Record> recordElems = new ArrayList<>();
 
-            if (ctx.STRING() != null)
-                for (TerminalNode s : ctx.STRING())
+            if (ctx.STRING() != null) {
+                for (TerminalNode s : ctx.STRING()) {
                     strElems.add(s.getText());
+                }
+            }
 
-            if (ctx.NAT() != null)
-                for (TerminalNode i : ctx.NAT())
+            if (ctx.NAT() != null) {
+                for (TerminalNode i : ctx.NAT()) {
                     intElems.add(Integer.parseInt(i.getText()));
+                }
+            }
 
             if (ctx.record() != null) {
                 RecordVisitor recordVisitor = new RecordVisitor();
 
-                for (TLAParser.RecordContext r : ctx.record())
+                for (TLAParser.RecordContext r : ctx.record()) {
                     recordElems.add(r.accept(recordVisitor));
+                }
             }
 
             return new SetElement(strElems, intElems, recordElems);
@@ -175,5 +180,4 @@ public class VisitorOrientedParser {
             return new Record(elems);
         }
     }
-
 }

@@ -4,10 +4,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Entity {
-
     private final String name;
+
     private final Map<String, Record> records;
+
     private final Map<String, RecordFieldValue> values;
+
     private final Set set;
 
     // p = ( n1 :> [nif |-> n1, ts |-> {}, a |-> 0, s |-> FALSE] @@  n2 :> [nif |-> n2, ts |-> {}, a |-> 0, s |-> FALSE] )
@@ -43,7 +45,7 @@ public class Entity {
         StringBuilder s = new StringBuilder();
         s.append("    ").append(name).append(" = ");
 
-        if (!records.isEmpty()){
+        if (!records.isEmpty()) {
             // To only print new line in between records
             s.append("<\n");
             int i = 0;
@@ -51,7 +53,6 @@ public class Entity {
 
             for (Entry<String, Record> e : records.entrySet()) {
                 s.append("      ").append(e.getKey()).append(" = {\n").append(e.getValue().toString());
-
             }
 
             s.append("\n    >");
@@ -63,12 +64,12 @@ public class Entity {
 
             for (Entry<String, RecordFieldValue> e : values.entrySet()) {
                 s.append("(").append(e.getKey()).append(" :> ").append(e.getValue().toString()).append(")");
-                if (++i < size)
+                if (++i < size) {
                     s.append(", "); // newline only between elements
+                }
             }
             s.append(">");
-        }
-        else if (set != null) {
+        } else if (set != null) {
             s.append(set);
         } else {
             s.append("<<>>");
