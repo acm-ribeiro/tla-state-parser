@@ -35,8 +35,7 @@ public class Record {
         for(Entry<String, RecordFieldValue> e : elems.entrySet())
             s.append("        ").append(e.getKey()).append(" = ").append(e.getValue()).append("\n");
 
-        s.deleteCharAt(s.length()-1);
-        s.append("      }\n");
+        s.append("      }");
 
         return s.toString();
     }
