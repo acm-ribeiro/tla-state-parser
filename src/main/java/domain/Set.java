@@ -10,6 +10,10 @@ public class Set {
         this.elems = elems;
     }
 
+    public void add(SetElement elem) {
+        this.elems.add(elem);
+    }
+
     public List<SetElement> getElems() {
         return elems;
     }

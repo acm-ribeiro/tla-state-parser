@@ -72,13 +72,14 @@ public class VisitorOrientedParser {
         @Override
         public Entity visitEntity(TLAParser.EntityContext ctx) {
             String name = ctx.STRING().getText();
-            TLAParser.SetContext setCtx = ctx.set() != null ? ctx.set() : null;
 
             SetVisitor setVisitor = new SetVisitor();
-            Set set = ctx.set() != null ? ctx.set().accept(setVisitor) : null;
+            TLAParser.SetContext setCtx = ctx.set() != null ? ctx.set() : null;
+            Set set = setCtx != null ? setCtx.accept(setVisitor) : null;
 
             boolean emptyMap = ctx.EMPTY_MAP() != null;
             Map<String, Record> records = new HashMap<>();
+            Map<String, RecordFieldValue> values = new HashMap<>();
 
             TLAParser.MapContext mapCtx = ctx.map() != null ? ctx.map() : null;
             if (!emptyMap && mapCtx != null) {
@@ -87,14 +88,20 @@ public class VisitorOrientedParser {
 
                 String recordId;
                 for (TLAParser.MapElementContext elemCtx : elemsCtx) {
-                    recordId = elemCtx.STRING().getText();
-                    Record r = elemCtx.record().accept(recordVisitor);
-                    r.setId(recordId);
-                    records.put(recordId, r);
+                    recordId = elemCtx.STRING(0).getText();
+                    if (elemCtx.record() != null) {
+                        Record r = elemCtx.record().accept(recordVisitor);
+                        r.setId(recordId);
+                        records.put(recordId, r);
+                    } else {
+                        RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
+                        RecordFieldValue value = new RecordFieldValue(elemCtx.STRING(1).getText(), null, null, null);
+                        values.put(recordId, value);
+                    }
                 }
             }
 
-            return new Entity(name, records, set);
+            return new Entity(name, records, set, values);
         }
     }
 

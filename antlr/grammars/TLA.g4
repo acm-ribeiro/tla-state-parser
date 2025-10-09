@@ -30,7 +30,7 @@ map
     ;
 
 mapElement
-    : STRING ':>' record
+    : STRING ':>' (record | STRING)
     ;
 
 record 
