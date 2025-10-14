@@ -1,4 +1,4 @@
-package parser;// Generated from java-escape by ANTLR 4.11.1
+// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -33,7 +33,7 @@ public class TLAParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'f'", "':>'", null, "'@@'", "'<<>>'", "'/\\'", null, null, "'['", 
+			null, "'f'", "':>'", null, "'@@'", "'<<>>'", "'/\\\\'", null, null, "'['", 
 			"']'", "'{'", "'}'", "'('", "')'", "'='", "'|->'", "','", null, "' '"
 		};
 	}
@@ -118,7 +118,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitState(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -186,7 +186,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitStateElement(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitStateElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -218,7 +218,7 @@ public class TLAParser extends Parser {
 				setState(37);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
-				while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
@@ -266,7 +266,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitFState(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitFState(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -323,7 +323,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitEntity(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitEntity(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -411,7 +411,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitMap(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitMap(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -477,7 +477,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitMapElement(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitMapElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -551,7 +551,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitRecord(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -619,7 +619,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitRecordElement(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitRecordElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -671,7 +671,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitFieldValue(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitFieldValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -750,7 +750,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitSet(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitSet(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -827,7 +827,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitSetElement(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitSetElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -954,7 +954,7 @@ public class TLAParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TLAVisitor) return ((TLAVisitor<? extends T>)visitor).visitObjectRecord(this);
+			if ( visitor instanceof TLAVisitor ) return ((TLAVisitor<? extends T>)visitor).visitObjectRecord(this);
 			else return visitor.visitChildren(this);
 		}
 	}

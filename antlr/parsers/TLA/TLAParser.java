@@ -33,7 +33,7 @@ public class TLAParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'f'", "':>'", null, "'@@'", "'<<>>'", "'/\\'", null, null, "'['", 
+			null, "'f'", "':>'", null, "'@@'", "'<<>>'", "'/\\\\'", null, null, "'['", 
 			"']'", "'{'", "'}'", "'('", "')'", "'='", "'|->'", "','", null, "' '"
 		};
 	}

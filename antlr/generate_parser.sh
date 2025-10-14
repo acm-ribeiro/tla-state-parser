@@ -7,9 +7,8 @@ fi
 
 # Variables
 parsers="parsers/"
-dir="_parser"
 name=$1                                     # first command line argument
-parser_dir="$parsers$name$dir"              # /parsers/[parser_name]_parser
+parser_dir="$parsers$name"              # /parsers/[parser_name]_parser
 
 g4=".g4"
 grammars_dir="grammars/"
