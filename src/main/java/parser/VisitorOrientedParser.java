@@ -93,7 +93,6 @@ public class VisitorOrientedParser {
                         r.setId(recordId);
                         records.put(recordId, r);
                     } else {
-                        RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
                         RecordFieldValue value = new RecordFieldValue(elemCtx.STRING(1).getText(), null, null, null);
                         values.put(recordId, value);
                     }
