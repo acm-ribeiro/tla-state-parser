@@ -1,15 +1,25 @@
 package domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class State {
 
     private final String original;
     private final List<StateElement> elements;
+    private Map<String, Entity> entities;
 
     public State(String original, List<StateElement> elements) {
         this.original = original;
         this.elements = elements;
+
+        entities = new HashMap<>();
+        for (StateElement elem : elements) {
+            if (elem.isEntity()) {
+                entities.putAll(elem.getEntities());
+            }
+        }
     }
 
     /**
@@ -28,6 +38,16 @@ public class State {
      */
     public List<StateElement> getElements() {
         return elements;
+    }
+
+    /**
+     * Returns a map of this state's entities. An entity is a set of records, e.g. p = {p1 :> [...], p2:> [...]} key: p
+     * value: the set of records
+     *
+     * @return entities map
+     */
+    public Map<String, Entity> getEntities() {
+        return entities;
     }
 
     /**
