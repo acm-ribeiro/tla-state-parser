@@ -13,10 +13,9 @@ fi
 
 # Variables
 parsers="parsers/"
-dir="_parser"
-name=$1                                     # first command line argument
-rule=$2                                     # second command line argument
-parser_dir="$parsers$name$dir"              # /parsers/[parser_name]_parser
+name=$1                                  # first command line argument
+rule=$2                                  # second command line argument
+parser_dir="$parsers$name"               # /parsers/[parser_name]
 
 g4=".g4"
 grammars_dir="grammars/"
@@ -34,7 +33,7 @@ alias grun='java -Xmx500M -cp "$PWD/antlr_env/antlr-4.11.1-complete.jar:$CLASSPA
 
 
 # Compile generated Java files
-echo $'> compiling generated java code'
+echo $'> compiling generated Java files'
 cd $parser_dir
 javac *.java
 
