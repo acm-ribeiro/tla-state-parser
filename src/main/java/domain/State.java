@@ -9,6 +9,7 @@ public class State {
     private final String original;
     private final List<StateElement> elements;
     private Map<String, Entity> entities;
+    private boolean found;
 
     public State(String original, List<StateElement> elements) {
         this.original = original;
@@ -20,6 +21,26 @@ public class State {
                 entities.putAll(elem.getEntities());
             }
         }
+
+        found = false;
+    }
+
+    /**
+     * Checks whether this state has been found.
+     * Used on SSG for coverage computation purposes.
+     *
+     * @return found
+     */
+    public boolean isFound() {
+        return found;
+    }
+
+    /**
+     * Marks this state as found.
+     * Used on SSG for coverage computation purposes.
+     */
+    public void markFound() {
+        found = true;
     }
 
     /**
