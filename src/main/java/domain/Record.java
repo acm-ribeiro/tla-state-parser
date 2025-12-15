@@ -1,14 +1,15 @@
 package domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class Record {
 
     private String id;
-    private final Map<String, RecordFieldValue> elems;
+    private final List<RecordElement> elems;
 
-    public Record(Map<String, RecordFieldValue> elems) {
+    public Record(List<RecordElement> elems) {
         this.elems = elems;
     }
 
@@ -20,20 +21,25 @@ public class Record {
         this.id = id;
     }
 
-    public Map<String, RecordFieldValue> getElems() {
+    public List<RecordElement> getElems() {
         return elems;
     }
 
     public RecordFieldValue getElement(String name) {
-        return elems.getOrDefault(name, null);
+        for(RecordElement elem : elems) {
+            if(elem.getName().equals(name)) {
+                return elem.getValue();
+            }
+        }
+        return null;
     }
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        for(Entry<String, RecordFieldValue> e : elems.entrySet())
-            s.append("        ").append(e.getKey()).append(" = ").append(e.getValue()).append("\n");
+        for(RecordElement e : elems)
+            s.append("        ").append(e.getName()).append(" = ").append(e.getValue()).append("\n");
 
         s.append("      }");
 

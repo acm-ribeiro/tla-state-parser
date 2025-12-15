@@ -13,12 +13,15 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import domain.Entity;
 import domain.FState;
+import domain.MapElement;
 import domain.Record;
+import domain.RecordElement;
 import domain.RecordFieldValue;
 import domain.Set;
 import domain.SetElement;
 import domain.State;
 import domain.StateElement;
+import domain.TLAMap;
 
 public class VisitorOrientedParser {
     public State parse(String s) {
@@ -77,29 +80,44 @@ public class VisitorOrientedParser {
             Set set = setCtx != null ? setCtx.accept(setVisitor) : null;
 
             boolean emptyMap = ctx.EMPTY_MAP() != null;
-            Map<String, Record> records = new HashMap<>();
-            Map<String, RecordFieldValue> values = new HashMap<>();
 
             TLAParser.MapContext mapCtx = ctx.map() != null ? ctx.map() : null;
-            if (!emptyMap && mapCtx != null) {
-                List<TLAParser.MapElementContext> elemsCtx = mapCtx.mapElement();
-                RecordVisitor recordVisitor = new RecordVisitor();
+            TLAMap tlaMap = mapCtx != null && !emptyMap? new MapVisitor().visit(mapCtx) : null;
 
-                String recordId;
-                for (TLAParser.MapElementContext elemCtx : elemsCtx) {
-                    recordId = elemCtx.STRING(0).getText();
-                    if (elemCtx.record() != null) {
-                        Record r = elemCtx.record().accept(recordVisitor);
-                        r.setId(recordId);
-                        records.put(recordId, r);
-                    } else {
-                        RecordFieldValue value = new RecordFieldValue(elemCtx.STRING(1).getText(), null, null, null);
-                        values.put(recordId, value);
-                    }
-                }
+            return new Entity(name, tlaMap, set, emptyMap);
+        }
+    }
+
+    public static class MapVisitor extends TLABaseVisitor<TLAMap> {
+        @Override
+        public TLAMap visitMap(TLAParser.MapContext ctx) {
+            List<TLAParser.MapElementContext> elemsCtx = ctx.mapElement();
+            MapElementVisitor mapElementVisitor = new MapElementVisitor();
+            List<MapElement> elements = new ArrayList<>(elemsCtx.size());
+
+            for (TLAParser.MapElementContext elem : elemsCtx) {
+                MapElement mapElem = mapElementVisitor.visit(elem);
+                elements.add(mapElem);
             }
 
-            return new Entity(name, records, set, values);
+            return new TLAMap(elements);
+        }
+    }
+
+    public static class MapElementVisitor extends TLABaseVisitor<MapElement> {
+        @Override
+        public MapElement visitMapElement(TLAParser.MapElementContext ctx) {
+            String key = ctx.STRING(0).getText();
+
+            RecordVisitor recordVisitor = new RecordVisitor();
+            Record recordValue = ctx.record() != null ? ctx.record().accept(recordVisitor) : null;
+
+            SetVisitor setVisitor = new SetVisitor();
+            Set setValue = ctx.set() != null ? ctx.set().accept(setVisitor) : null;
+
+            String strValue = ctx.STRING(1) != null ? ctx.STRING(1).getText() : null;
+
+            return new MapElement(key, strValue, recordValue, setValue);
         }
     }
 
@@ -113,7 +131,12 @@ public class VisitorOrientedParser {
             SetVisitor setVisitor = new SetVisitor();
             Set set = ctx.set() != null ? ctx.set().accept(setVisitor) : null;
 
-            return new RecordFieldValue(str, num, bool, set);
+            boolean emptyMap = ctx.EMPTY_MAP() != null;
+
+            MapVisitor mapVisitor = new MapVisitor();
+            TLAMap tlaMap = ctx.map() != null ? ctx.map().accept(mapVisitor) : null;
+
+            return new RecordFieldValue(str, num, bool, set, tlaMap, emptyMap);
         }
     }
 
@@ -165,18 +188,27 @@ public class VisitorOrientedParser {
     public static class RecordVisitor extends TLABaseVisitor<Record> {
         @Override
         public Record visitRecord(TLAParser.RecordContext ctx) {
-            RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
-            Map<String, RecordFieldValue> elems = new HashMap<>();
+            RecordElementVisitor recordElementVisitor = new RecordElementVisitor();
+            List<RecordElement> elems = new ArrayList<>();
 
-            String name;
-            RecordFieldValue value;
+            RecordElement recordElem;
             for (TLAParser.RecordElementContext e : ctx.recordElement()) {
-                name = e.STRING().getText();
-                value = e.fieldValue().accept(fieldValueVisitor);
-                elems.put(name, value);
+                recordElem = recordElementVisitor.visit(e);
+                elems.add(recordElem);
             }
 
             return new Record(elems);
+        }
+    }
+
+    public static class RecordElementVisitor extends TLABaseVisitor<RecordElement> {
+        @Override
+        public RecordElement visitRecordElement(TLAParser.RecordElementContext ctx) {
+            String name = ctx.STRING().getText();
+            RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
+            RecordFieldValue value = ctx.fieldValue() != null? ctx.fieldValue().accept(fieldValueVisitor) : null;
+
+            return new RecordElement(name, value);
         }
     }
 }

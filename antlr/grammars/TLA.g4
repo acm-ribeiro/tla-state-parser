@@ -30,7 +30,7 @@ map
     ;
 
 mapElement
-    : STRING ':>' (record | STRING)
+    : STRING ':>' (record | STRING | set)
     ;
 
 record 
@@ -46,6 +46,8 @@ fieldValue
     | NAT
     | BOOLEAN
     | set
+	| LPAR map RPAR
+	| EMPTY_MAP
     ;
 
 set

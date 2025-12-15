@@ -1,5 +1,5 @@
-// Generated from java-escape by ANTLR 4.11.1
-package parser;
+package parser;// Generated from java-escape by ANTLR 4.11.1
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;

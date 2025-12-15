@@ -9,8 +9,8 @@ public class ParserTests {
     @Test
     public void testParser() {
         String stateStr =
-            "/\\\\ f = FALSE/\\\\ tournaments = <<>>/\\\\ players = <<>>/\\\\ enrollments = <<>>";
+            "/\\\\ products = (p1 :> [features |-> {}, configurations |-> (c1 :> {})])/\\\\ f = FALSE";
         State state = parser.parse(stateStr);
-        System.out.println(state.toString());
+        System.out.println(state);
     }
 }
